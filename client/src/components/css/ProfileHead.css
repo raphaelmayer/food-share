@@ -1,0 +1,33 @@
+.profileHead {
+	border: 1px solid #eee;
+	grid-area: prHead;
+	text-align: center;
+}
+.profileHead-picture {
+	border: 1px solid #eee;
+	height: 130px;
+	margin: 13% auto 0 auto;
+	width: 130px;
+}
+.profileHead-info {
+	font-size: 90%;
+	text-align: left;
+	width: 100%;
+}
+.profileHead-info table {
+	width: 100;
+}
+.profileHead-info td {
+	margin-left: 10px;
+	padding: 5px 12px;
+}
+.profileHead-rating-box {
+	color: orange;
+	display: inline-flex;
+	font-weight: 600;
+	padding: 10px 1px 5px 1px;
+}
+.profileHead-rating-box div {
+	margin: auto 4px;
+	padding: 0 !important;
+}

@@ -1,0 +1,9 @@
+.styledInput {
+	border: 2px solid #eee;
+	border-radius: 5px;
+	padding: 2px 5px;
+}
+textarea {
+	width: 60%;
+	height: 100px;
+}

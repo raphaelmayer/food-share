@@ -1,0 +1,44 @@
+.profile-grid {
+	display: grid;
+	grid-template-rows: 48vh 14vh auto;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px 40px;
+	grid-template-areas: ' prHead main main '
+						 ' prPortf main main '
+						 ' prDesc main main '
+						 ' prDesc rev rev '
+						 ' ... rev rev ';
+	text-align: left;
+}
+.profile-grid div {
+}
+.profile-description {
+	border: 1px solid #eee;
+	grid-area: prDesc;
+	padding: 10px 20px;
+}
+.profile-portfolio {
+	border: 1px solid #eee;
+	grid-area: prPortf;
+	padding: 10px 20px;
+}
+.profile-main {
+	border: 1px solid #eee;
+	display: inline-block;
+	grid-area: main;
+	text-align: center;
+	padding: 10px 20px;
+}
+.profile-reviews {
+	border: 1px solid #eee;
+	grid-area: rev;
+	padding: 10px 20px;
+}
+
+.pf-box {
+	background: #eee;
+	display: inline-flex;
+	height: 50px; 
+	margin: 5px;
+	width: 80px;
+}

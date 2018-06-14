@@ -1,0 +1,62 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-gap: 0px;
+	grid-template-areas: ' fltr card ';
+}
+.find-filter {
+	background: #eee;
+	grid-area: fltr;
+}
+.card-container {
+	grid-area: card;
+	min-height: 100vh;
+}
+
+
+.filter-container {
+	background: rgba(15, 100, 200, 0.1);
+	padding-top: 2vh;
+}
+.categories-box {
+	display: inline-flex;
+	padding: 2vh 15%;
+	width: 70%;
+}
+.categories-btn {
+	background: white;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin: 0 auto;
+	padding: 2px 4px;
+}
+
+.head {
+	padding: 2vh 0 5vh 0;
+} 
+.big-search-form {
+	border: 2px solid #eee;
+	border-radius: 4px;
+	margin: 0 auto;
+	width: 40%;
+}
+.big-search-bar {
+	border: none;
+	color: #999;
+	font-size: 20px;
+	padding: 8px 1%;
+	width: 88%;
+}
+.big-search-submit {
+	border: none;
+	border-left: 1px solid #eee;
+	border-radius: 0;
+	display: inline;
+	font-size: 20px;
+	width: 10%;
+}
+.big-search-submit:hover {
+	background: none;
+	border: none;
+	border-left: 1px solid silver;
+}

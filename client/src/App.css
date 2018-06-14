@@ -1,0 +1,81 @@
+body {
+	font-family: 'open sans';
+	margin: 0;
+}
+.App {
+  	text-align: center;
+}
+.container60 {
+	margin: 0 auto;
+	width: 60%;
+}
+.container70 {
+	margin: 0 auto;
+	width: 70%;
+}
+.container80 {
+	margin: 0 auto;
+	width: 80%;
+}
+.container {
+}
+
+.section {
+	margin: 0 auto;
+	padding: 5vh 5vw;
+}
+.section-small {
+	margin: 0 auto;
+	padding: 1vh 1vw;
+}
+
+.grey {
+	color: silver;
+}
+
+.auth-form {
+	margin: 20vh auto;
+	width: 10%;
+}
+.auth-form input {
+	margin: 2px;
+}
+
+.imagex {
+	background: #eee;
+	height: 40vh;
+}
+
+
+h4 {
+	margin: 6px 0;
+	padding: 0;
+}
+p {
+	margin: 0;
+	padding-bottom: 10px;
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+button {
+	background: white;
+	border: 2px solid #eee9de;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 90%;
+	padding: 5px;
+	transition: all 0.1s ease;
+}
+button:hover {
+	box-shadow: 0px 0px 4px 1px #eee;
+}
+
+.loading-screen {
+	background: tomato;
+	height: 100vh;
+	opacity: 0.8;
+	position: absolute;
+	width: 100vw;
+}
