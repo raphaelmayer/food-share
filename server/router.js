@@ -126,13 +126,13 @@ module.exports = (app) => {
 
 //========================== reviews ===========================
 
-  apiRoutes.get('/reviews/get/:gigId', (req, res) => {
+  apiRoutes.get('/review/get/:gigId', (req, res) => {
     Review.find({ gigId: req.params.gigId }, (err, reviews) => {
       res.json(reviews);
     })
   });
 
-  apiRoutes.post('/reviews/post', requireAuth, (req, res, next) => {
+  apiRoutes.post('/review/post', requireAuth, (req, res, next) => {
     let review = new Review(req.body);
     review.save((err, review) => {
       if(err) { return next(err); }
@@ -140,7 +140,7 @@ module.exports = (app) => {
     });
   });
 
-  apiRoutes.post('/reviews/update/:id', requireAuth, (req, res, next) => {
+  apiRoutes.post('/review/update/:id', requireAuth, (req, res, next) => {
     Review.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, review) => {
       if (err) { res.json({ error: err }); }
       if (!review) { res.json({ missing: req.params.id }); }
@@ -148,7 +148,7 @@ module.exports = (app) => {
     });
   });
 
-  apiRoutes.post('/reviews/delete/:id', requireAuth, (req, res, next) => {
+  apiRoutes.post('/review/delete/:id', requireAuth, (req, res, next) => {
     Review.findByIdAndRemove(req.params.id, (err, review) => {
       if (err) { res.json({ error: err }); }
       if (!review) { res.json({ missing: req.params.id }); }

@@ -1,19 +1,29 @@
-import authHeader from '../helpers/auth-header'; 
+import post from '../helpers/post';
+import { getToken } from '../services/auth.service';
 
-//client.service is not in use right now
-
-export function getRequest(url) {}
-
-export function postRequest(url, payload) {
-	const options = {
-	  	method: 'POST',
-	  	mode: 'cors',
-	  	headers: authHeader(),
-	  	body: JSON.stringify(payload),   
+export function updateUser(formdata) {
+	const token = getToken();
+	const user = {
+    	description: formdata[0].value,
+		country: formdata[1].value,
+		profilePicture: formdata[2].value,
+		seller: { id: token.user._id, username: token.user.username },
 	}
+	post('/user/update/' + token.user._id, user)
+      	.catch(err => console.error(err))
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+      		//this.props.history.push('/' + token.user.username);
+		})
+}	
 
-	fetch('http://localhost:3001/api' + url, options)
-	  	.catch(err => alert(err))		//handleError(err)
-	  	.then(res => res.json())
-	  	.then(data => console.log(data))
+export function deleteUser(id) {
+	post('/user/delete/' + id)
+      	.catch(err => console.error(err))
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+      		//this.props.history.push('/');
+		})
 }

@@ -39,7 +39,6 @@ class Profile extends Component {
 				<div className="container">
 					<div>
 						<button type="button" onClick={this.handleTest}>test</button>
-						<button type="button" onClick={e => alert("Add the feature!")}>add gig</button>
 						<EditButton onClick={() => this.setState( edit ? {edit:false}:{edit:true})} user={user.username} />
 					</div>
 					

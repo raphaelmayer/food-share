@@ -1,7 +1,7 @@
 import React from 'react';
 //import './css/Reviews.css';
 
-import { postReview, updateReview, deleteReview } from '../services/review.service';
+import { createReview, updateReview, deleteReview } from '../services/review.service';
 
 import ReviewBox from './ReviewBox';
 
@@ -11,7 +11,7 @@ const Reviews = (props) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		postReview(e.target, user);
+		createReview(e.target, user);
 	}
 	function handleUpdate(e, id) {
 		e.preventDefault();

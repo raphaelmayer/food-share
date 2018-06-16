@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
 import './css/new.css';
 
-import post from '../helpers/post';
+import { createGig } from '../services/gig.service';
 
 class New extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   handleSubmit(e) {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem('accessToken')).user;
-    console.log(user)
-    const newGig = {
-      title: e.target[0].value,
-      description: e.target[1].value,
-      seller: { username: user.username, id: user._id },
-    }
-    
-    post('/gig/post', newGig)
-      .catch(err => console.error(err))
-      .then(res => res.json())
-      .then(gig => this.props.history.push('/' + gig.seller.username));
+    createGig(e.target);
   }
   
   render() {

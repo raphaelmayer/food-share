@@ -8,7 +8,7 @@ exports.getCompleteUser = async function(res, username, id) {
   const user = await User.findOne({ username: username });
   const gigs = await Gig.find({ "seller.username": username });
   const reviews = await Review.find({ 'seller.username': username });
-  const stats = statsTotal(gigs);
+  const stats = statsTotal(reviews);
 console.log(user);
   return { 
     username: user.username, 
@@ -21,17 +21,13 @@ console.log(user);
   }
 }
 
-const statsTotal = (gigs) => {
-  const ratingTotal = gigs.reduce((x, y) => x + y.rating, 0) / gigs.length,
-        reviewTotal = gigs.reduce((x, y) => x + y.reviewCount, 0);
-    return ({ rating: Math.round(ratingTotal * 10) / 10,
-              reviewCount: reviewTotal});
+const statsTotal = (reviews) => {
+  const ratingTotal = reviews.reduce((x, y) => x + y.rating, 0) / reviews.length;
+    return { rating: Math.round(ratingTotal * 10) / 10 };
 }
-exports.statsTotal = (gigs) => {
-  const ratingTotal = gigs.reduce((x, y) => x + y.rating, 0) / gigs.length,
-        reviewTotal = gigs.reduce((x, y) => x + y.reviewCount, 0);
-    return ({ rating: Math.round(ratingTotal * 10) / 10,
-              reviewCount: reviewTotal});
+exports.statsTotal = (reviews) => {
+  const ratingTotal = reviews.reduce((x, y) => x + y.rating, 0) / reviews.length;
+    return { rating: Math.round(ratingTotal * 10) / 10 };
 }
 
 

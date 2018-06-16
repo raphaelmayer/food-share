@@ -3,32 +3,24 @@ import { Link } from 'react-router-dom';
 import './css/GigEdit.css';
 
 import { getToken } from '../services/auth.service';
-import post from '../helpers/post';
+import { updateGig } from '../services/gig.service';
 
 class GigEdit extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {  }
-
-		this.handleTest = this.handleTest.bind(this);
+		this.state = {  };
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	componentDidMount() {
-		const username = getToken().user.username; 	//redux state?
-		const url = window.location.pathname.split('/');
-		//if(username === url[2]) 
-		console.log('gigname:', decodeURI(url[3]))
+		//const username = getToken().user.username; 	//redux state?
+		const id = window.location.pathname.split('/')[3];
+		console.log('gigId:', decodeURI(id))
 		
-		fetch('http://localhost:3001/api/gig/get/' + url[3]) 
+		fetch('http://localhost:3001/api/gig/get/' + id) 
 			.then(res => res.json())
 			.then(gig => this.setState({ gig }))
-    }
-
-    handleTest(e) {
-    	e.preventDefault();
-    	console.log(this.state);
     }
 
     handleChange(e) {
@@ -38,24 +30,10 @@ class GigEdit extends Component {
     }
 
     handleSubmit(e) {
-    	console.log(window.location.pathname)
     	e.preventDefault();
-    	for(let i=0; i<e.target.length; i++) {
-    		console.log(e.target[i].name + ':', e.target[i].value);
-    	}
-    	const url = window.location.pathname.split('/');
-    	const updatedGig = {
-    		//_id: url[3],
-      		title: e.target[0].value,
-      		description: e.target[1].value,
-    	}
-    	
-	    post('/gig/update/' + url[3], updatedGig)
-	      	.catch(err => console.error(err))
-	      	.then(res => res.json())
-	      	.then(updatedGig => console.log(updatedGig))
-	      	//.then(updatedGig => this.props.history.push('/' + updatedGig.username));
-	}
+    	const id = window.location.pathname.split('/')[3];
+    	updateGig(e.target, id);
+    }
 	    
 
 	render() {

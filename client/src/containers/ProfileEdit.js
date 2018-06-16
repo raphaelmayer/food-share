@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './css/ProfileEdit.css';
 
 import { getToken } from '../services/auth.service';
-import post from '../helpers/post';
+import { updateUser } from '../services/client.service';
 
 class ProfileEdit extends Component {
 	constructor(props) {
@@ -11,7 +11,6 @@ class ProfileEdit extends Component {
 		this.state = {
 			user: null,
 		};
-		this.handleTest = this.handleTest.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -21,41 +20,19 @@ class ProfileEdit extends Component {
 		console.log(userId)
 		fetch('http://localhost:3001/api/user/get/' + userId)
 			.then(res => res.json())
-			.then(user => this.setState({user: user}))
-    }
-
-    handleTest(e) {
-    	e.preventDefault();
-    	console.log(this.state);
+			.then(user => this.setState({ user: user }))
     }
 
     handleChange(e) {
-    	let newUserState = {...this.state.user};
+    	let newUserState = { ...this.state.user };
     	newUserState[e.target.name] = e.target.value;
     	this.setState({ user: newUserState });
     }
 
     handleSubmit(e) {
     	e.preventDefault();
-		const userId = getToken().user._id; 
-
-    	for(let i=0; i<e.target.length; i++) {
-    		console.log(e.target[i].name + ':', e.target[i].value);
-    	}
-
-    	const updatedProfile = {
-    		description: e.target[0].value,
-			country: e.target[1].value,
-			profilePicture: e.target[2].value,
-    	}
-
-	    post('/user/update/' + userId, updatedProfile)
-	      	.catch(err => console.error(err))
-	      	.then(res => res.json())
-	      	.then(updatedProfile => console.log(updatedProfile))
-	      	//.then(updatedProfile => this.props.history.push('/' + updatedProfile.username));
+    	updateUser(e.target);
 	}
-	    
 
 	render() {
 		const { user } = this.state;
