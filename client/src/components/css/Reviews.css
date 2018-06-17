@@ -1,0 +1,18 @@
+.review-box {
+	position: relative;
+}
+.editIcons {
+	color: silver;
+	display: inline-flex;
+	font-size: 20px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.editIcons span {
+	cursor: pointer;
+	margin: 0 2px;
+}
+.editIcons span:hover {
+	color: #999;
+}

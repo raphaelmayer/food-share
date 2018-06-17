@@ -21,16 +21,14 @@ exports.updateUser = (req, res, next) => {
   User.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, user) => {
     if (err) console.error(err);
     if (!user) res.json({ error: 'no such user' });
-    console.log(user);
     res.json(user);
   });
 }
 
 exports.deleteUser = (req, res) => {
-  //User.findByIdAndDelete(req.params.id, (err, user) => {
-  //  if (err) console.error(err);
-  //  if (!user) res.json({ error: 'no such user' });
-  //  res.json({ success: 'user removed.'});
-  //});
-  res.json("not enabled yet");
+  User.findByIdAndDelete(req.params.id, (err, user) => {
+    if (err) console.error(err);
+    if (!user) res.json({ error: 'no such user' });
+    res.json({ success: 'user removed.'});
+  });
 }

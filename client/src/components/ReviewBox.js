@@ -2,43 +2,40 @@ import React from 'react';
 //import './css/ReviewBox.css';
 
 const ReviewBox = (props) => {
-	if (props.update) {
-		return(
-			<div className='review-box'>
-				<strong>{ props.author.username }</strong>
-				<div style={{color: 'orange', display: 'inline'}}>
-	        	  	<i className={props.rating<=0 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating<1.9 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating<2.9 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating<3.9 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating>4.9 ? "fas fa-star" : "far fa-star"}></i>
-	        	</div>
-				<br />
-				{ props.text }
-				<br />
-				<button onClick={ () => props.show = true }>Edit</button>
-				<button onClick={ (e) => props.update(e, props._id) }>Update</button>
-				<button onClick={ (e) => props.delete(e, props._id) }>Delete</button>
-			</div>
-		);		
-	} else {
-		return(
-			<div className='review-box'>
-				<strong>{ props.author.username }</strong>
-				<div style={{color: 'orange', display: 'inline'}}>
-	        	  	<i className={props.rating<=0 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating<1.9 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating<2.9 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating<3.9 ? "far fa-star" : "fas fa-star"}></i>
-	        	  	<i className={props.rating>4.9 ? "fas fa-star" : "far fa-star"}></i>
-	        	</div>
-				<br />
-				{ props.text }
-				<br />
-			</div>
-		);			
-	}
+	console.log(props)
+	//console.log(props.user.id === props.author.id)
+	//console.log(props.user.id + " + " + props.author.id)
 
+		return(
+			<div className='review-box'>
+				<strong>{ props.author.username }</strong>
+				<div style={{ color: 'orange', display: 'inline' }}>
+	        	  	<i className={ props.rating<=0 ? "far fa-star" : "fas fa-star" }></i>
+	        	  	<i className={ props.rating<1.9 ? "far fa-star" : "fas fa-star" }></i>
+	        	  	<i className={ props.rating<2.9 ? "far fa-star" : "fas fa-star" }></i>
+	        	  	<i className={ props.rating<3.9 ? "far fa-star" : "fas fa-star" }></i>
+	        	  	<i className={ props.rating>4.9 ? "fas fa-star" : "far fa-star" }></i>
+	        	</div>
+				<br />
+				{/* props.showInput ? <input placeholder={ props.text } /> : <div>{ props.text }</div> */}
+				<br />
+				{ props.user && props.user.id === props.author.id ? <EditIcons reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
+
+			</div>
+		);
+
+}
+const EditIcons = (props) => {
+	return(
+			<div className="editIcons">
+				<span onClick={ (e) => props.update(e, props.reviewId) }>
+					<i className="far fa-edit"></i>
+				</span>
+				<span onClick={ (e) => props.delete(e, props.reviewId) }>
+					<i className="far fa-trash-alt"></i>
+				</span>
+			</div>
+	);
 }
 
 export default ReviewBox; 

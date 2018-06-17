@@ -9,7 +9,6 @@ import PrivateRoute from './components/PrivateRoute';
 import { store } from './helpers/store';
 
 import { Nav } from './containers/nav';
-import Front from './components/front';
 import BecomeMentor from './components/become-mentor';
 import Profile from './containers/profile';
 import ProfileEdit from './containers/ProfileEdit';
@@ -53,7 +52,6 @@ class App extends Component {
               <Route path="/register" component={ Register } />
               <Route path="/login" component={ Login } />
               <Route path="/become" component={ BecomeMentor } />
-              <Route path="/frontpage" component={ Front } />
               <Route path="/settings" component={ Settings } />
               
               <PrivateRoute exact path="/editprofile" component={ ProfileEdit } />

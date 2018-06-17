@@ -60,7 +60,7 @@ class Profile extends Component {
 	
 						<div className="profile-reviews">
 							<h4>profile-reviews</h4>
-              				<Reviews user={{ id: user._id, username: user.username }} reviews={ user.reviews } />
+              				<Reviews seller={{ id: user._id, username: user.username }} reviews={ user.reviews } />
 						</div>
 	
 					</div>

@@ -54,7 +54,7 @@ module.exports = (app) => {
 
   apiRoutes.get('/getgigs', gigController.getGigs);
 
-  apiRoutes.get('/gig/get/:gigId', gigController.getGig);
+  apiRoutes.get('/gig/get/:id', gigController.getGig);
 
   apiRoutes.post('/gig/post', requireAuth, gigController.createGig);
 

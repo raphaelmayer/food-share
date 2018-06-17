@@ -9,14 +9,13 @@ exports.getGigs = (req, res, next) => {
 }
 
 exports.getGig = (req, res, next) => {
-  Gig.findById(req.params.gigId, (err, gig) => {
+  Gig.findById(req.params.id, (err, gig) => {
     if (err) console.error(err);
     res.json(gig);
   });
 }
 
 exports.createGig = (req, res, next) => {
-  console.log(req.body);
   let gig = new Gig(req.body);
 
   gig.save((err, gig) => {
