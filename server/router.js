@@ -1,12 +1,13 @@
-const AuthenticationController = require('./controllers/authentication'),
-								 express = require('express'),
-								 passportService = require('./config/passport'),
-								 passport = require('passport');
-                 helpers = require('./helpers');
+const AuthController = require('./controllers/authentication'),
+  reviewController = require('./controllers/review'),
+  gigController = require('./controllers/gig'),
+  userController = require('./controllers/user'),
+	express = require('express'),
+	passportService = require('./config/passport'),
+	passport = require('passport'),
+  helpers = require('./helpers');
 
-const Gig = require('./models/gig');
-const User = require('./models/user');
-const Review = require('./models/review');
+const Gig = require('./models/gig');  //für test
 
 //auth middleware
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -26,135 +27,50 @@ module.exports = (app) => {
   apiRoutes.use('/auth', authRoutes);
 
   // Registration route
-  authRoutes.post('/register', AuthenticationController.register);
+  authRoutes.post('/register', AuthController.register);
 
   // Login route
-  authRoutes.post('/login', requireLogin, AuthenticationController.login);
+  authRoutes.post('/login', requireLogin, AuthController.login);
 
 	// Set url for API group routes
   app.use('/api', apiRoutes);
 
 
-  // routes
+// routes
 
 //========================== user ===========================
 
-  apiRoutes.get('/user/getall/:username/:gigId', (req, res) => {
-    const username = req.params.username;
-    const gigId = req.params.gigId;
-    helpers.getCompleteUser(res, username, gigId)
-    .then(data => res.json(data));
-  });
+  apiRoutes.get('/user/getall/:username/:gigId', userController.getCompleteUser);
+
+  apiRoutes.get('/user/getall/:username', userController.getCompleteUser);
   
-  apiRoutes.get('/user/getall/:username', (req, res) => {
-    const username = req.params.username;
-    helpers.getCompleteUser(res, username)
-    .then(data => res.json(data));
-  });
+  apiRoutes.get('/user/get/:id', userController.getUser);
 
-  apiRoutes.get('/user/get/:userId', (req, res) => {
-    console.log(req.params.userId)
-    User.findById(req.params.userId, (err, user) => {
-      if (err) { res.json({ error: 'cannot find user' }) }
-      res.json(user);
-    });
-  });
+  apiRoutes.post('/user/update/:id', requireAuth, userController.updateUser);
 
-  apiRoutes.post('/user/update/:userId', requireAuth, (req, res, next) => {
-    const userId = req.params.userId;
-    const newUser = req.body;
-
-    User.findByIdAndUpdate(userId, { $set: newUser }, (err, user) => {
-      if (err) { return err ; }
-      if(!user) res.json({ error: 'no such user' });
-      console.log(user);
-      res.json(user);
-    });
-  });
-
-  apiRoutes.post('/user/delete/:id', requireAuth, (req, res) => {
-    //User.findByIdAndDelete(req.params.id, (err, user) => {
-    //  if (err) { return err ; }
-    //  if(!user) res.json({ error: 'no such user' });
-      res.json({ success: 'user removed.'});
-    //});
-  });
+  apiRoutes.post('/user/delete/:id', requireAuth, userController.deleteUser);
 
 //========================== gigs ===========================
 
-  apiRoutes.get('/getgigs', (req, res) => {
-    Gig.find({}, (err, gig) => {
-      if(err) { console.log(err); }
-      if(gig) { res.json(gig); } 
-      else { res.json({ Response: "No gigs found" }); };
-    });
-  });
+  apiRoutes.get('/getgigs', gigController.getGigs);
 
-  apiRoutes.get('/gig/get/:gigId', (req, res) => {
-    Gig.findById(req.params.gigId, (err, gig) => {
-      if (err) { return next(err); }
-      res.json(gig);
-    });
-  });
+  apiRoutes.get('/gig/get/:gigId', gigController.getGig);
 
-  apiRoutes.post('/gig/post', requireAuth, (req, res, next) => {
-    console.log(req.body);
-    let gig = new Gig(req.body);
+  apiRoutes.post('/gig/post', requireAuth, gigController.createGig);
 
-    gig.save((err, gig) => {
-      if(err) { return next(err); }
-      res.json(gig);
-    });
-  });
+  apiRoutes.post('/gig/update/:id', requireAuth, gigController.updateGig);
 
-  apiRoutes.post('/gig/update/:id', requireAuth, (req, res, next) => {
-    Gig.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, gig) => {
-      if (err) { console.error(err); }
-      if(!gig) res.json({ error: 'no such gig' });
-      console.log(gig);
-      res.json(gig);
-    });
-  });
-
-  apiRoutes.post('/gig/delete/:id', requireAuth, (req, res) => {
-    Gig.findByIdAndDelete(req.params.id, (err, gig) => {
-      if (err) { return err ; }
-      if(!gig) res.json({ error: 'no such gig' });
-      res.json({ success: 'gig removed.'});
-    });
-  });
+  apiRoutes.post('/gig/delete/:id', requireAuth, gigController.deleteGig);
 
 //========================== reviews ===========================
 
-  apiRoutes.get('/review/get/:gigId', (req, res) => {
-    Review.find({ gigId: req.params.gigId }, (err, reviews) => {
-      res.json(reviews);
-    })
-  });
+  apiRoutes.get('/review/get/:gigId', reviewController.getReviews);
 
-  apiRoutes.post('/review/post', requireAuth, (req, res, next) => {
-    let review = new Review(req.body);
-    review.save((err, review) => {
-      if(err) { return next(err); }
-      res.json(review);
-    });
-  });
+  apiRoutes.post('/review/post', requireAuth, reviewController.createReview);
 
-  apiRoutes.post('/review/update/:id', requireAuth, (req, res, next) => {
-    Review.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, review) => {
-      if (err) { res.json({ error: err }); }
-      if (!review) { res.json({ missing: req.params.id }); }
-      else { res.json({ success: 'UPDATED ' + review._id }); }
-    });
-  });
+  apiRoutes.post('/review/update/:id', requireAuth, reviewController.updateReview);
 
-  apiRoutes.post('/review/delete/:id', requireAuth, (req, res, next) => {
-    Review.findByIdAndRemove(req.params.id, (err, review) => {
-      if (err) { res.json({ error: err }); }
-      if (!review) { res.json({ missing: req.params.id }); }
-      else { res.json({ success: 'DELETED ' + review._id }); }
-    });
-  });
+  apiRoutes.post('/review/delete/:id', requireAuth, reviewController.deleteReview);
 
 //========================== testing ===========================
 
