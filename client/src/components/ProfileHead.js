@@ -20,7 +20,7 @@ const ProfileHead = (props) => {
           <i className={ props.stats.rating>4.9 ? "fas fa-star" : "far fa-star" }></i>
         </div>
         <div>{ props.stats.rating }</div>
-        <div className="grey">({ props.stats.reviewCount })</div>
+        <div className="grey">({ props.reviews.length })</div>
       </div>
       
       { props.isProfile ? 

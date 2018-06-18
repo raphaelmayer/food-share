@@ -8,24 +8,28 @@ import ReviewBox from './ReviewBox';
 class Reviews extends Component {
 	constructor() {
 		super();
-		this.state = { showInput: false }
-		this.handleShowInput = this.handleShowInput.bind(this);
+		this.state = { edit: false }
+		this.toggleEdit = this.toggleEdit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 	}
-	handleShowInput(e) {
-		this.state.showInput ? 
-			this.setState({ showInput: false }) 
+	toggleEdit(e, id) {
+		const review = this.props.reviews.filter((d) => d._id == id ? d : null)[0]; 
+		console.log(review);
+		this.state.edit ? 
+			this.setState({ edit: false }) 
 			: 
-			this.setState({ showInput: true });
+			this.setState({ edit: review });
 	}
 	handleSubmit(e) {
 		e.preventDefault();
+		console.log('create');
 		createReview(e.target, this.props.seller);
 	}
-	handleUpdate(e, id) {
+	handleUpdate(e) {
 		e.preventDefault();
 		console.log('update');
-		window.prompt("asd")
-		//updateReview(e.target, id);
+		updateReview(e.target, this.state.edit._id);
 	}
 	handleDelete(e, id) {
 		e.preventDefault();
@@ -36,8 +40,6 @@ class Reviews extends Component {
 	console.log("reviews.props", this.props)
 	const { reviews, seller } = this.props;
 	const user = getToken().user;
-
-	console.log("user", user)
 
 
 	if (!user) {	//if not logged in 
@@ -55,12 +57,14 @@ class Reviews extends Component {
 			<div>
 				<div className='reviews-container'>
 					{ reviews ? 
-						reviews.map((review, i) => <ReviewBox user={{ id: user._id, username: user.username }} update={ this.handleUpdate } delete={ this.handleDelete } { ...review } key={i} />)
+						reviews.map((review, i) => <ReviewBox toggleEdit={ this.toggleEdit } user={{ id: user._id, username: user.username }} update={ this.handleUpdate } delete={ this.handleDelete } { ...review } key={i} />)
 						: 'No reviews yet. Be the first one to rate!' }
 				</div>
 				
-				<form onSubmit={ this.handleSubmit } >
-					<textarea></textarea>
+				<form onSubmit={ this.state.edit ? this.handleUpdate : this.handleSubmit } >
+					<textarea placeholder={ this.state.edit.text } >
+
+					</textarea>
 					<input type='number' placeholder='1-5' />
 					<input type='submit' />
 				</form>

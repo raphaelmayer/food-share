@@ -2,7 +2,7 @@ import React from 'react';
 //import './css/ReviewBox.css';
 
 const ReviewBox = (props) => {
-	console.log(props)
+	//console.log(props)
 	//console.log(props.user.id === props.author.id)
 	//console.log(props.user.id + " + " + props.author.id)
 
@@ -17,9 +17,9 @@ const ReviewBox = (props) => {
 	        	  	<i className={ props.rating>4.9 ? "fas fa-star" : "far fa-star" }></i>
 	        	</div>
 				<br />
-				{/* props.showInput ? <input placeholder={ props.text } /> : <div>{ props.text }</div> */}
+				<div>{ props.text }</div>
 				<br />
-				{ props.user && props.user.id === props.author.id ? <EditIcons reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
+				{ props.user && props.user.id === props.author.id ? <EditIcons toggleEdit={ props.toggleEdit } reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
 
 			</div>
 		);
@@ -28,7 +28,7 @@ const ReviewBox = (props) => {
 const EditIcons = (props) => {
 	return(
 			<div className="editIcons">
-				<span onClick={ (e) => props.update(e, props.reviewId) }>
+				<span onClick={ (e) => props.toggleEdit(e, props.reviewId) }>
 					<i className="far fa-edit"></i>
 				</span>
 				<span onClick={ (e) => props.delete(e, props.reviewId) }>
