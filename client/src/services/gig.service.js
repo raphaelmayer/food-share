@@ -21,7 +21,7 @@ export function createGig(formdata) {
 }
 
 export function updateGig(formdata, id) {
-	const token = getToken();
+	//const token = getToken();
 	console.log(id)
 	const gig = {
 		title: formdata[0].value,

@@ -1,6 +1,8 @@
 .review-box {
+	margin: 15px 1px;
 	position: relative;
 }
+
 .editIcons {
 	color: silver;
 	display: inline-flex;
@@ -16,3 +18,16 @@
 .editIcons span:hover {
 	color: #999;
 }
+
+.new-rev-form {
+	isplay: table;
+	text-align: center;
+}
+.new-rev-form textarea, input, button {
+	margin: 5px 0;
+}
+.new-rev-form textarea {
+	width: 80%;
+}
+.new-rev-form input {}
+.new-rev-form button {}

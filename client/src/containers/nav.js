@@ -31,8 +31,8 @@ class Nav extends Component {
   		const UserMenu = (props) => {
   			return(
   				<div className="userMenu">
-            <div><Link to={"/" + props.user} onClick={() => {this.setState({ userMenu: false });{/*this.props.history.push('/' + props.user)*/}}}>{props.user}</Link></div>
-            <div><Link to={"/editprofile"} onClick={() => this.setState({ userMenu: false })}>Edit Profile</Link></div>
+            <div><Link to={"/" + props.user} onClick={ () => this.setState({ userMenu: false }) }>{props.user}</Link></div>
+            <div><Link to={"/editprofile"} onClick={ () => this.setState({ userMenu: false }) }>Edit Profile</Link></div>
             <div><Link to="/settings" onClick={() => this.setState({ userMenu: false })}>Settings</Link></div>
   					<div onClick={this.handleLogout}>Logout</div>
           </div>
@@ -43,10 +43,6 @@ class Nav extends Component {
       		<nav>
             <div className="nav-left">
               <Link to="/" className="logo">FoodShare</Link>
-              <form className="nav-form">
-                <input placeholder="search here..."/>
-                <input type="submit"/>
-              </form>
             </div>
   
             <div className="nav-right">

@@ -31,7 +31,6 @@ class Profile extends Component {
 
 	render() {
 		const { user, edit } = this.state;
-		const portfolioMockUp = ["Project 1", "Project 2", "Project 3"];
 		//console.log('from profile:', user)
 
 		if(user) {

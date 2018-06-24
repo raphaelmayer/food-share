@@ -14,7 +14,7 @@ class Reviews extends Component {
 		this.handleUpdate = this.handleUpdate.bind(this);
 	}
 	toggleEdit(e, id) {
-		const review = this.props.reviews.filter((d) => d._id == id ? d : null)[0]; 
+		const review = this.props.reviews.filter((d) => d._id === id ? d : null)[0]; 
 		console.log(review);
 		this.state.edit ? 
 			this.setState({ edit: false }) 
@@ -61,12 +61,14 @@ class Reviews extends Component {
 						: 'No reviews yet. Be the first one to rate!' }
 				</div>
 				
-				<form onSubmit={ this.state.edit ? this.handleUpdate : this.handleSubmit } >
-					<textarea placeholder={ this.state.edit.text } >
-
-					</textarea>
-					<input type='number' placeholder='1-5' />
-					<input type='submit' />
+				<form className="new-rev-form" onSubmit={ this.state.edit ? this.handleUpdate : this.handleSubmit } >
+					<textarea className="styledInput" rows="5" placeholder={ this.state.edit.text } />
+					
+					<div>Please rate your experience:{ "\n" }
+						<input className="styledInput" type='number' min="1" max="5" placeholder='1-5' />
+					</div>
+					<button type='submit'>Submit!</button>
+					{ this.state.edit ? <button onClick={ this.toggleEdit }>Cancel</button> : null }
 				</form>
 			</div>
 		);

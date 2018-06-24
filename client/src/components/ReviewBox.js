@@ -9,7 +9,6 @@ const ReviewBox = (props) => {
 		return(
 			<div className='review-box'>
 				<strong>{ props.author.username } </strong> 
-	        	<small>({ props.updatedAt.split("").splice(0, 10) })</small>
 				<div style={{ color: 'orange', display: 'inline' }}>
 	        	  	<i className={ props.rating<=0 ? "far fa-star" : "fas fa-star" }></i>
 	        	  	<i className={ props.rating<1.9 ? "far fa-star" : "fas fa-star" }></i>
@@ -18,7 +17,8 @@ const ReviewBox = (props) => {
 	        	  	<i className={ props.rating>4.9 ? "fas fa-star" : "far fa-star" }></i>
 	        	</div>
 				<div>{ props.text }</div>
-				{ props.user && props.user.id === props.author.id ? <EditIcons toggleEdit={ props.toggleEdit } reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
+				<small>(Last edit at { props.updatedAt.split("").splice(0, 10) })</small>
+{ props.user && props.user.id === props.author.id ? <EditIcons toggleEdit={ props.toggleEdit } reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
 
 			</div>
 		);

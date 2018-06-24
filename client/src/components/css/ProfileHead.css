@@ -1,6 +1,7 @@
 .profileHead {
 	border: 1px solid #eee;
 	grid-area: prHead;
+	padding-bottom: 6%; /* needed because pH-picture {margin: 13% (...);}  */
 	text-align: center;
 }
 .profileHead-picture {

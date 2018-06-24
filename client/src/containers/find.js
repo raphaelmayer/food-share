@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
@@ -40,7 +39,7 @@ class Find extends Component {
 						<div><strong>kind of food </strong></div>
 						<div>fruit</div>
 						<div>vegetables</div>
-						<div>meat</div>
+						<div>animal products: meat / eggs / milk</div>
 						<div>sweets</div>
 						<div>non alcoholic beverages</div>
 						<div>alcohol</div>

@@ -35,7 +35,7 @@ class Gig extends Component {
   }
 
   render() {
-    const { user, edit } = this.state;
+    const { user } = this.state;
     const url = window.location.pathname.split('/');
     const position = user.gigs.map(gig => gig._id).indexOf(decodeURI(url[2]));
     const gig = this.state.user.gigs[position];
@@ -50,12 +50,6 @@ class Gig extends Component {
         </Link>
 
           <div className="container60 gig-grid">
-  
-            <div className="gig-head">
-              <div>Main</div>
-              <div>Else</div>
-              <div>Reviews</div>
-            </div>
   
             <div className="gig-main">
               <h3 className="gig-title">{ gig.title }</h3>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './css/GigEdit.css';
 
-import { getToken } from '../services/auth.service';
 import { updateGig, deleteGig } from '../services/gig.service';
 
 class GigEdit extends Component {
