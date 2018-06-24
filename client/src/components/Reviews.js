@@ -46,9 +46,9 @@ class Reviews extends Component {
 		return(
 			<div>
 				<div className='reviews-container'>
-					{ reviews ? 
+					{ reviews[0] ? 
 						reviews.map((review, i) => <ReviewBox update={ null } delete={ null } { ...review } key={i} />)
-						: 'No reviews yet. Be the first one to rate!' }
+						: <div className="no-revs-yet">No reviews yet. Be the first one to rate!</div> }
 				</div>
 			</div>
 		);		
@@ -56,9 +56,9 @@ class Reviews extends Component {
 		return(
 			<div>
 				<div className='reviews-container'>
-					{ reviews ? 
+					{ reviews[0] ? 
 						reviews.map((review, i) => <ReviewBox toggleEdit={ this.toggleEdit } user={{ id: user._id, username: user.username }} update={ this.handleUpdate } delete={ this.handleDelete } { ...review } key={i} />)
-						: 'No reviews yet. Be the first one to rate!' }
+						: <div className="no-revs-yet">No reviews yet. Be the first one to rate!</div> }
 				</div>
 				
 				<form className="new-rev-form" onSubmit={ this.state.edit ? this.handleUpdate : this.handleSubmit } >
