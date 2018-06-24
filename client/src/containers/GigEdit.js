@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './css/GigEdit.css';
 
 import { getToken } from '../services/auth.service';
-import { updateGig } from '../services/gig.service';
+import { updateGig, deleteGig } from '../services/gig.service';
 
 class GigEdit extends Component {
 	constructor(props) {
@@ -32,7 +32,16 @@ class GigEdit extends Component {
     handleSubmit(e) {
     	e.preventDefault();
     	const id = window.location.pathname.split('/')[3];
+    	console.log("updating gig")
     	updateGig(e.target, id);
+    }
+
+    handleDelete(e) {
+    	e.preventDefault();
+    	const id = window.location.pathname.split('/')[3];
+    	console.log("deleting gig")
+    	if (window.confirm("Are you sure?")) deleteGig(id);
+
     }
 	    
 
@@ -54,6 +63,11 @@ class GigEdit extends Component {
 
 						<button type="submit">submit</button>
 					</form>
+
+					<div className="gig-edit-delete-container">
+						<div>You may choose to delete your items. Beware that this action cannot be undone.</div>
+						<button onClick={ this.handleDelete } type="button">DELETE</button>
+					</div>
 				</div>	
 			)
 		} else {

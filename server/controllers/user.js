@@ -26,7 +26,7 @@ exports.updateUser = (req, res, next) => {
 }
 
 exports.deleteUser = (req, res) => {
-  User.findByIdAndDelete(req.params.id, (err, user) => {
+  User.findByIdAndRemove(req.params.id, (err, user) => {
     if (err) console.error(err);
     if (!user) res.json({ error: 'no such user' });
     res.json({ success: 'user removed.'});

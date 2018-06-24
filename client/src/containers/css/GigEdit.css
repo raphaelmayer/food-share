@@ -1,0 +1,20 @@
+/* .edit-form etc in ProfileEdit */
+.gig-edit-delete-container {
+	border: 2px solid rgba(255, 100, 100, 0.7);
+	border-radius: 5px;
+	display: inline-flex;
+	margin: 10px;
+	padding: 10px;
+}
+.gig-edit-delete-container button, .gig-edit-delete-container div {
+	font-weight: 800;
+	margin: auto 4px;
+}
+.gig-edit-delete-container button {
+	border: 1px solid rgba(255, 100, 100, 0.7);
+	color: rgba(255, 100, 100, 1);
+}
+.gig-edit-delete-container button:hover {
+	background: rgba(255, 100, 100, 0.7);
+	color: white;
+}

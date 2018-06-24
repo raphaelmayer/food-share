@@ -34,7 +34,7 @@ exports.updateGig = (req, res, next) => {
 }
 
 exports.deleteGig = (req, res, next) => {
-  Gig.findByIdAndDelete(req.params.id, (err, gig) => {
+  Gig.findByIdAndRemove(req.params.id, (err, gig) => {
     if (err) console.error(err);
     if (!gig) res.json({ error: 'no such gig' });
     res.json({ success: 'gig removed.', gig: gig });

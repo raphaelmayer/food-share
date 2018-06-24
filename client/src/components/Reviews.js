@@ -23,17 +23,17 @@ class Reviews extends Component {
 	}
 	handleSubmit(e) {
 		e.preventDefault();
-		console.log('create');
+		console.log('creating review ...');
 		createReview(e.target, this.props.seller);
 	}
 	handleUpdate(e) {
 		e.preventDefault();
-		console.log('update');
+		console.log('updating review ...');
 		updateReview(e.target, this.state.edit._id);
 	}
 	handleDelete(e, id) {
 		e.preventDefault();
-		console.log('delete');
+		console.log('deleting review ...');
 		if (window.confirm("Are you sure?")) deleteReview(id);
 	}
 	render() {
