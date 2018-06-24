@@ -53,19 +53,39 @@ class GigEdit extends Component {
 				<div className="container60">
 					<button type="button" onClick={this.handleTest}>test</button>
 
-					<form className="edit-form" onSubmit={this.handleSubmit} >
-						<div className="section-small">
-							<input className="styledInput" onChange={this.handleChange} name='title' value={gig.title} />
-						</div>
-						<div className="section-small">
-							<input className="styledInput" onChange={this.handleChange} name='description' value={gig.description} />
-						</div>
+					<h2>Edit your item</h2>
+
+					<form onSubmit={this.handleSubmit} >
+            			<div className="section-small">
+            			  <h4>title</h4>
+            			  <input className="styledInput" onChange={this.handleChange} type="input" maxLength="50" placeholder="title" name='title' value={gig.title} required />
+            			</div>
+            			
+            			<div className="section-small">
+            			  <h4>description</h4>
+            			  <textarea className="styledInput" onChange={this.handleChange} rows="5" cols="20" placeholder="description" name='description' type="input" required value={gig.description} />
+            			</div>
+            			
+            			<div className="section-small">
+            			  <h4>Date Of Expiry</h4>
+            			  <input className="styledInput" onChange={this.handleChange} type="date" placeholder="dateOfExpiry" name='dateOfExpiry' required value={gig.dateOfExpiry} />
+            			</div>
+            			
+            			<div className="section-small">
+            			  <h4>location</h4>
+            			  <input className="styledInput" onChange={this.handleChange} type="input" maxLength="50" placeholder="location" name='location' required value={gig.location} />
+            			</div>
+            			
+            			<div className="section-small">
+            			  <h4>Set up tags</h4>
+            			  <input className="styledInput" onChange={this.handleChange} type="text" placeholder="tags" name='tags' multiple value={gig.tags} />
+            			</div>
 
 						<button type="submit">submit</button>
 					</form>
 
 					<div className="gig-edit-delete-container">
-						<div>You may choose to delete your items. Beware that this action cannot be undone.</div>
+						<div>You may choose to delete this item. Beware that this action is permanent and cannot be undone.</div>
 						<button onClick={ this.handleDelete } type="button">DELETE</button>
 					</div>
 				</div>	

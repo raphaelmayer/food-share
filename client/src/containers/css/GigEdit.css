@@ -1,9 +1,23 @@
 /* .edit-form etc in ProfileEdit */
+.section-small-edit {
+	display: flex;
+	margin: 0 auto;
+	padding: 1vh 1vw;
+	justify-content: center;
+}
+.section-small-edit h4 {
+	text-align: left;
+	width: 120px;
+}
+.section-small-edit div {
+	width: 120px;
+}
+
 .gig-edit-delete-container {
 	border: 2px solid rgba(255, 100, 100, 0.7);
 	border-radius: 5px;
 	display: inline-flex;
-	margin: 10px;
+	margin: 20px 10px;
 	padding: 10px;
 }
 .gig-edit-delete-container button, .gig-edit-delete-container div {

@@ -43,7 +43,7 @@ class ProfileEdit extends Component {
 					<button type="button" onClick={this.handleTest}>test</button>
 
 					<form className="edit-form" onSubmit={this.handleSubmit} >	
-						Edit { user.username }'s profile
+						<h2>Edit { user.username }'s profile</h2>
 
 						<div className="section-small">
 							<input className="styledInput" onChange={this.handleChange} name='description' value={user.description} />

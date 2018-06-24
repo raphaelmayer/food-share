@@ -6,8 +6,6 @@
 	grid-template-areas: ' ghead ghead ghead '
 						 ' main main prHead '
 						 ' main main loc '
-						 ' rev rev loc '
-						 ' rev rev ... '
 						 ' rev rev ... ';
 	text-align: left;
 }
