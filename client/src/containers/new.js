@@ -22,7 +22,7 @@ class New extends Component {
           <h1>New Gig</h1>
           
           <div className="section-small">
-          <h4>Enter a title for your gig, like: "I make beautiful wedding photos!" (max. 50 characters)</h4>
+          <h4>Enter a title for your gig, like: "I make beautiful wedding photos!" (max. 50 characters).</h4>
             <input className="styledInput" placeholder="title" type="input" maxLength="50" required />
           </div>
           
@@ -32,7 +32,17 @@ class New extends Component {
           </div>
           
           <div className="section-small">
-          <h4>Set up to 15 tags to optimize your chances of being found by search. (Hint: Try to be specific about what it is you sell.)</h4>
+          <h4>Date Of Expiry (Format: Day . Month . Year)</h4>
+            <input className="styledInput" placeholder="description" type="date" length="400px" required />
+          </div>
+          
+          <div className="section-small">
+          <h4>Enter a location where users can collect the food (max. 50 characters).</h4>
+            <input className="styledInput" placeholder="location" type="input" maxLength="50" required />
+          </div>
+          
+          <div className="section-small">
+          <h4>Set up to 15 tags to optimize your chances of being found by search (Hint: Try to be specific about what it is you sell.).</h4>
             <input className="styledInput" placeholder="tags" type="text" multiple />
           </div>
           

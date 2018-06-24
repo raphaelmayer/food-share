@@ -1,10 +1,9 @@
 .profile-grid {
 	display: grid;
-	grid-template-rows: 48vh 14vh auto;
+	grid-template-rows: 48vh auto auto auto;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 20px 40px;
 	grid-template-areas: ' prHead main main '
-						 ' prPortf main main '
 						 ' prDesc main main '
 						 ' prDesc rev rev '
 						 ' ... rev rev ';

@@ -42,7 +42,7 @@ class Nav extends Component {
     	return (
       		<nav>
             <div className="nav-left">
-              <Link to="/" className="logo">Mentorhaven</Link>
+              <Link to="/" className="logo">FoodShare</Link>
               <form className="nav-form">
                 <input placeholder="search here..."/>
                 <input type="submit"/>
@@ -56,8 +56,7 @@ class Nav extends Component {
               <div className="nav-btns">
                 <Link to="/search" className="nav-btn"><i className="fas fa-search"></i></Link>
                 <Link to="/new" className="nav-btn"><i className="fas fa-plus"></i></Link>
-            		<Link to="/frontpage" className="nav-btn">Get Started</Link>
-            		<Link to="/become" className="nav-btn">Become a Mentor</Link>
+            		<Link to="/getstarted" className="nav-btn">Get Started</Link>
             		<div className="nav-btn nav-profile-box" onClick={this.openUserMenu}>
             			{this.props.auth.user || 'Login'}
             			<i className="fas fa-user"></i>

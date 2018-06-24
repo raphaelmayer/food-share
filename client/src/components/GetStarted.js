@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/become-mentor.css';
 
-class BecomeMentor extends Component {
+class GetStarted extends Component {
   render() {
     return (
         
@@ -47,4 +47,4 @@ class BecomeMentor extends Component {
   }
 }
 
-export default BecomeMentor;
+export default GetStarted;

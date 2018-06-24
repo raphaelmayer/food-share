@@ -2,7 +2,7 @@ import React from 'react';
 import isOwner from '../helpers/isOwner';
 
 const EditButton = props => {
-	return(
+	return (
 		isOwner(props.user) ? <button onClick={ props.onClick }>EditButton</button> : null
 	)
 }

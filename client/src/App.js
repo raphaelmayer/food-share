@@ -9,7 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { store } from './helpers/store';
 
 import { Nav } from './containers/nav';
-import BecomeMentor from './components/become-mentor';
+import GetStarted from './components/GetStarted';
 import Profile from './containers/profile';
 import ProfileEdit from './containers/ProfileEdit';
 import GigEdit from './containers/GigEdit';
@@ -41,7 +41,7 @@ class App extends Component {
   render() {
     const { alert, auth } = this.props;
     return (
-        <Router history={history}>
+        <Router history={ history }>
           <div className="App">
             
             { alert ? alert.message && <div className={`alert ${alert.type}`}>{alert.message}</div> : null }
@@ -51,12 +51,11 @@ class App extends Component {
             <Switch>
               <Route path="/register" component={ Register } />
               <Route path="/login" component={ Login } />
-              <Route path="/become" component={ BecomeMentor } />
+              <Route path="/getstarted" component={ GetStarted } />
               <Route path="/settings" component={ Settings } />
               
               <PrivateRoute exact path="/editprofile" component={ ProfileEdit } />
               <PrivateRoute path="/editgig/:username/:gigTitle" component={ GigEdit } />
-            {/*<PrivateRoute exact path="/edit" render={() => <ProfileEdit user={auth.user} /> } />*/}
     
               <Route path="/:username/:gigTitle" component={ Gig } />
               <Route exact path="/" component={ Find } />

@@ -46,7 +46,7 @@ class Gig extends Component {
   
         <button onClick={this.handleClick}>test</button>
         <Link to={ '/editgig/' + user.username + '/' + gig._id } >
-          <EditButton onClick={ () => console.log('todo') } user={user.username} />
+          <EditButton onClick={ () => console.log('todo') } user={ user.username } />
         </Link>
 
           <div className="container60 gig-grid">
@@ -58,34 +58,39 @@ class Gig extends Component {
             </div>
   
             <div className="gig-main">
-              <h4>gig-main</h4>
-              <h3 className="gig-title">{gig.title}</h3>
+              <h3 className="gig-title">{ gig.title }</h3>
               <div className="gig-main-image"></div>
+              
+              <div className="gig-main-desc">
+                <h4>Description</h4>
+                <p>{ gig.description }</p>
+              </div>
+              
+              <div className="gig-main-desc">
+                <h4>Facts</h4>
+                <p>Date of Expiry: { gig.dateOfExpiry }</p>
+                <p>Location: { gig.location }</p>
+              </div>
             </div>
-  
-            <div className="gig-description">
-              <h4>gig-description</h4>
-              <p>{gig.description}</p>
-            </div> 
   
             <div className="gig-reviews">
-              <h4>gig-reviews</h4>
+              <h4>Reviews</h4>
               <Reviews seller={{ id: user._id, username: user.username }} reviews={ user.reviews } />
-            </div>        
+            </div>       
               
-            <div className="gig-short">
-              <h4>gig-short</h4>
-              <div>€ {gig.price}</div>
+            <div className="gig-location">
+              <h4>Location</h4>
+              <div></div>
             </div>
   
-            <ProfileHead isProfile={false} {...user} />  
+            <ProfileHead isProfile={ false } { ...user } />  
   
           </div>
         </div>
       );
     } else { 
       return (
-        <div>No gig found.<button onClick={this.handleClick}>test</button></div>
+        <div>No gig found.<button onClick={ this.handleClick }>test</button></div>
       )
     }
   }

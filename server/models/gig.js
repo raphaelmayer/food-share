@@ -10,6 +10,14 @@ const GigSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	location: {
+		type: String,
+		required: true,
+	},
+	dateOfExpiry: {
+		type: String,
+		required: true,
+	},
 	status: {
 		type: String,
 		required: true,

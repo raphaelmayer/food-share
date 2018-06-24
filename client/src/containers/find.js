@@ -36,17 +36,25 @@ class Find extends Component {
 		const Filter = () => {
 			return(
 				<div className="filter-container">
-					<input type="text" placeholder="What service do you need?" />
-					<input type="text" placeholder="What is your budget?" />
-					<div className="categories-box">
-						<div className="categories-btn">category 1</div>
-						<div className="categories-btn">category 2</div>
-						<div className="categories-btn">category 3</div>
-						<div className="categories-btn">category 4</div>
-						<div className="categories-btn">category 5</div>
-						<div className="categories-btn">category 6</div>
-						<div className="categories-btn">category 7</div>
-						<div className="categories-btn">category 8</div>
+					<div>
+						<div><strong>kind of food </strong></div>
+						<div>fruit</div>
+						<div>vegetables</div>
+						<div>meat</div>
+						<div>sweets</div>
+						<div>non alcoholic beverages</div>
+						<div>alcohol</div>
+						<div>other</div>
+					</div>
+					<div>
+						<div><strong>date of expiry</strong></div>
+						<div>over DoE</div>
+						<div>less than a week</div>
+						<div>more than a week</div>
+					</div>
+					<div>
+						<div><strong>Max Distance</strong></div>
+						<div>0 - 1000 km</div>
 					</div>
 				</div>
 			)
@@ -58,6 +66,8 @@ class Find extends Component {
 
 		return(
 			<div className="container">
+				<Filter />
+
 				<div className="head">
 					<h1>What do you need today?{ this.props.client.isLoading }</h1>
 					<form className="big-search-form" onSubmit={this.handleSearch}>
@@ -66,13 +76,8 @@ class Find extends Component {
 					</form>
 				</div>
 
-				<div className="container70 grid">
-					<div className="find-filter">filter</div>
-
-					<div className="card-container">
-						{this.state.gigs ? this.state.gigs.map((props, i) => { return( <GigCard {...props} key={i} /> ); }) : null}
-					</div>
-
+				<div className="card-container">
+					{this.state.gigs ? this.state.gigs.map((props, i) => { return( <GigCard {...props} key={i} /> ); }) : null}
 				</div>
 			</div>
 		);

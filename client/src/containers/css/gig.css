@@ -1,12 +1,13 @@
 .gig-grid {
 	display: grid;
-	grid-template-rows: auto auto 40vh auto;
+	grid-template-rows: auto auto auto auto auto;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 20px 40px;
+	grid-gap: 20px;
 	grid-template-areas: ' ghead ghead ghead '
-						 ' main main short '
 						 ' main main prHead '
-						 ' desc desc ... '
+						 ' main main loc '
+						 ' rev rev loc '
+						 ' rev rev ... '
 						 ' rev rev ... ';
 	text-align: left;
 }
@@ -17,8 +18,6 @@
 	border: 1px solid #eee;
 	display: inline-flex;
 	grid-area: ghead;
-	padding: 0;
-	margin-bottom: -16px;
 }
 .gig-head div {
 	padding: 0;
@@ -36,24 +35,24 @@
 	margin: 6% auto;
 	width: 80%;
 }
-.gig-title {
-	border-bottom: 1px solid #eee;
-	padding-bottom: 14px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	text-align: center;
+.gig-main-desc {
+	box-sizing: border-box;
+	display: inline-table;
+	width: 50%;
 }
-.gig-description {
-	border: 1px solid #eee;
-	grid-area: desc;
+.gig-title {
+	text-align: center;
 }
 .gig-reviews {
 	border: 1px solid #eee;
 	grid-area: rev;
 }
-.gig-short {
+.gig-location {
 	border: 1px solid #eee;
-	grid-area: short;
+	grid-area: loc;
+}
+.gig-location div {
+	background: #eee;
+	height: 260px;
+	margin-bottom: 6px;
 }

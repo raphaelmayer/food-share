@@ -1,22 +1,14 @@
-.grid {
-	display: grid;
-	grid-template-columns: 1fr 4fr;
-	grid-gap: 0px;
-	grid-template-areas: ' fltr card ';
+.filter-container {
+	background: rgba(100, 100, 100, 0.1);
+	display: inline-flex;
+	padding: 2vh 0;
+	width: 100%;
 }
-.find-filter {
-	background: #eee;
-	grid-area: fltr;
+.filter-container div {
+	margin: 0 auto;
 }
 .card-container {
-	grid-area: card;
-	min-height: 100vh;
-}
-
-
-.filter-container {
-	background: rgba(15, 100, 200, 0.1);
-	padding-top: 2vh;
+	min-height: 54vh;
 }
 .categories-box {
 	display: inline-flex;

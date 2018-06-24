@@ -25,7 +25,7 @@ const GigCard = (props) => {
 			</div>
 			
 			<div className="text-box-bottom">
-				<small>STARTING AT </small>€ {props.price}
+				<i className="fas fa-map-marker-alt"></i> {props.location}
 			</div>
 		</Link>
 	);
