@@ -37,13 +37,12 @@ class Find extends Component {
 				<div className="filter-container">
 					<div>
 						<div><strong>kind of food </strong></div>
-						<div>fruit</div>
-						<div>vegetables</div>
-						<div>animal products: meat / eggs / milk</div>
-						<div>sweets</div>
-						<div>non alcoholic beverages</div>
-						<div>alcohol</div>
-						<div>other</div>
+						<div>fruits & vegetables</div>
+						<div>animal products</div>
+						<div>bread</div>
+						<div>sweets & snacks</div>
+						<div>beverages</div>
+						<div>others</div>
 					</div>
 					<div>
 						<div><strong>date of expiry</strong></div>
