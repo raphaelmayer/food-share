@@ -5,10 +5,11 @@ export function createGig(formdata) {
 	const token = getToken();
 	const gig = {
 		title: formdata[0].value,
-		description: formdata[1].value,
-		dateOfExpiry: formdata[2].value,
-		location: formdata[3].value,
-		//tags: formdata[4].value,
+		category: formdata[1].value,
+		description: formdata[2].value,
+		dateOfExpiry: formdata[3].value,
+		location: formdata[4].value,
+		tags: formdata[5].value,
 		seller: { id: token.user._id, username: token.user.username },
 	}
 	post('/gig/post', gig)
@@ -25,10 +26,11 @@ export function updateGig(formdata, id) {
 	console.log(id)
 	const gig = {
 		title: formdata[0].value,
-		description: formdata[1].value,
-		dateOfExpiry: formdata[2].value,
-		location: formdata[3].value,
-		//tags: formdata[4].value,
+		category: formdata[1].value,
+		description: formdata[2].value,
+		dateOfExpiry: formdata[3].value,
+		location: formdata[4].value,
+		tags: formdata[5].value,
 		//	.seller nied unbedingt gut
 		//seller: { id: token.user._id, username: token.user.username },
 	}

@@ -58,6 +58,17 @@ class GigEdit extends Component {
             			  <h4>title</h4>
             			  <input className="styledInput" onChange={this.handleChange} type="input" maxLength="50" placeholder="title" name='title' value={gig.title} required />
             			</div>
+            
+                        <div className="section-small">
+                          <h4>Choose a category for your gig</h4>
+                          <select className="styledInput" placeholder="category" type="input" required>
+                            <option>bread</option>
+                            <option>beverages</option>
+                            <option>meat and fish</option>
+                            <option>others</option>
+                            <option>milk and egg products</option>
+                          </select>
+                        </div>
             			
             			<div className="section-small">
             			  <h4>description</h4>

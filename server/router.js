@@ -45,7 +45,7 @@ module.exports = (app) => {
     
     // not as errorprone
      const options = {};
-    // if (p.input) options.searchTerm = p.input;
+     if (p.input) options.title = { "$regex": p.input, "$options": "i" };
      if (q.category) options.category = decodeURI(q.category);
      if (q.tags) options.tags = decodeURI(q.tags);
 console.log(options)

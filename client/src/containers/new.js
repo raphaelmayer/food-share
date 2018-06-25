@@ -27,6 +27,17 @@ class New extends Component {
             </div>
             
             <div className="section-small">
+              <h4>Choose a category for your gig</h4>
+              <select className="styledInput" placeholder="category" type="input" required>
+                <option>bread</option>
+                <option>beverages</option>
+                <option>meat and fish</option>
+                <option>others</option>
+                <option>milk and egg products</option>
+              </select>
+            </div>
+            
+            <div className="section-small">
               <h4>Describe your gig. Be as detailed as possible and try to answer the most common questions as best as possible.</h4>
               <textarea className="styledInput" placeholder="description" type="input" length="400px" required />
             </div>
