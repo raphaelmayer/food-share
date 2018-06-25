@@ -52,9 +52,9 @@ class Find extends Component {
 	handleSearch(e) {
 		e.preventDefault();
 		const fd = e.target; // fd = formdata
-		const category = fd[0].value === "Category" ? "" : "&category=" + fd[0].value;
-		const input = fd[1].value || null;
-		const tags = this.state.tags == [] ? "" : "&tags=" + this.state.tags.join("+");
+		const category = "&category=" + fd[0].value;
+		const input = fd[1].value || undefined;
+		const tags = "&tags=" + this.state.tags.join("+");
 		
 		const query = input + "?" + category.toLowerCase() + tags.toLowerCase();
 console.log(query)
