@@ -38,6 +38,24 @@ module.exports = (app) => {
 
 // routes
 
+  apiRoutes.get('/search/:input', (req, res) => {
+    const p = req.params; console.log(p);
+    const q = req.query; console.log(q);
+    console.log(decodeURI(req.url))
+    
+    // not as errorprone
+     const options = {};
+    // if (p.input) options.searchTerm = p.input;
+     if (q.category) options.category = decodeURI(q.category);
+     if (q.tags) options.tags = decodeURI(q.tags);
+console.log(options)
+    Gig.find(options, {}, (err, items) => {
+      if (err) console.error(err);
+      res.json(items);
+    })
+    //res.json({ "req.params": req.params, "req.query": req.query });
+  })
+
 //========================== user ===========================
 
   apiRoutes.get('/user/getall/:username/:gigId', userController.getCompleteUser);
@@ -74,27 +92,18 @@ module.exports = (app) => {
 
 //========================== testing ===========================
 
-  apiRoutes.get('/test', (req, res) => {
+  apiRoutes.get('/test', (req, res, next) => {
     const count = 20; //determines the number of individual calls
 
     for (let i=0; i<count;i++) {
       let x = helpers.generateGigs();
-      let gig = new Gig({
-        title: x.title,
-        price: x.price,
-        description: x.description,
-        rating: x.rating,
-        reviewCount: x.reviewCount,
-        seller: { username: x.seller.username,
-                  level: "Top Rated Seller",
-                  image: x.seller.image },
-        images: { thumbnail: x.images.thumbnail },
-      });
+      let gig = new Gig(x);
       gig.save((err, gig) => {
-        if(err) return next(err); 
+        if(err) console.error(err);
+        res.end('Error!');
       })
     }
-    res.end('Success! ' + count + ' gigs have been created.')
+    res.end('Success! ' + count + ' gigs have been created.');
   });
 
 };

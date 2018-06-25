@@ -6,11 +6,35 @@ import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
 import GigCard from '../components/GigCard';
 import './css/find.css';
 
+const filterOptions = [
+	[
+	"Category",
+	"Fruits and Vegetables",
+	"Meat and Fish",
+	"Egg and Milk Products",
+	"Bread",
+	"Sweets and Snacks",
+	"Frozen Food",
+	"Beverages",
+	"Others",
+	], [
+	"Tags",
+	"vegan",
+	"swag",
+	], [
+	"Max Distance",
+	], [
+	"Sort",
+	"Distance",
+	"Date of Expiry",
+	]
+]
 class Find extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { gigs: undefined };	
+		this.state = { gigs: undefined, filter: undefined };	
 		this.handleSearch = this.handleSearch.bind(this);
+		this.handleTest = this.handleTest.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,35 +49,32 @@ class Find extends Component {
 
 	handleSearch(e) {
 		e.preventDefault();
-		console.log(e.target[0].value);
-		//fetch('http://localhost:3001/api/.........')
-			//.then(res => res.json())
-			//.then(gigs => this.setState({ gigs: gigs }))
+		const fd = e.target; // fd = formdata
+		const category = fd[0].value === "Category" ? "" : "&category=" + fd[0].value;
+		const tags = fd[1].value === "Tags" ? "" : "&tags=" + fd[1].value;
+		const distance = fd[2].value === "Max Distance" ? "" : "&distance=" + fd[2].value;
+		const sort = fd[3].value === "Sort" ? "" : "&sort=" + fd[3].value;
+		
+		const query = fd[4].value || null + "?" + category.toLowerCase() + tags + distance + sort;
+			
+		fetch('http://localhost:3001/api/search/' + encodeURI(query))
+			.then(res => res.json())
+			.then(gigs => this.setState({ gigs: gigs }))
+	}
+	handleTest() {
+		console.log(this.state)
 	}
 
 	render() {
 		const Filter = () => {
 			return(
 				<div className="filter-container">
-					<div>
-						<div><strong>kind of food </strong></div>
-						<div>fruits & vegetables</div>
-						<div>animal products</div>
-						<div>bread</div>
-						<div>sweets & snacks</div>
-						<div>beverages</div>
-						<div>others</div>
-					</div>
-					<div>
-						<div><strong>date of expiry</strong></div>
-						<div>over DoE</div>
-						<div>less than a week</div>
-						<div>more than a week</div>
-					</div>
-					<div>
-						<div><strong>Max Distance</strong></div>
-						<div>0 - 1000 km</div>
-					</div>
+					{ filterOptions.map(arr => 
+						<select>
+							{ arr.map(str => <option>{ str }</option>) }
+						</select>) 
+					}
+					
 				</div>
 			)
 		}	
@@ -64,15 +85,19 @@ class Find extends Component {
 
 		return(
 			<div className="container">
+			<button onClick={ this.handleTest }>test</button>
+
+			<form onSubmit={this.handleSearch}>
 				<Filter />
 
 				<div className="head">
 					<h1>What do you need today?{ this.props.client.isLoading }</h1>
-					<form className="big-search-form" onSubmit={this.handleSearch}>
+					<div className="big-search-form">
 						<input className="big-search-bar" type="text" placeholder="Find Services" />
 						<button className="big-search-submit" type="submit"><i className="fas fa-search"></i></button>
-					</form>
+					</div>
 				</div>
+			</form>
 
 				<div className="card-container">
 					{this.state.gigs ? this.state.gigs.map((props, i) => { return( <GigCard {...props} key={i} /> ); }) : null}

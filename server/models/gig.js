@@ -10,6 +10,10 @@ const GigSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	category: {
+		type: String,
+		required: true,
+	},
 	location: {
 		type: String,
 		required: true,
@@ -17,6 +21,9 @@ const GigSchema = new Schema({
 	dateOfExpiry: {
 		type: String,
 		required: true,
+	},
+	tags: {
+		type: String,
 	},
 	status: {
 		type: String,

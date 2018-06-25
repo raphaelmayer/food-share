@@ -52,3 +52,6 @@
 	border: none;
 	border-left: 1px solid silver;
 }
+.border {	/* test */
+	border: 1px solid black;
+}

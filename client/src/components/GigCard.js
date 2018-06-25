@@ -5,7 +5,7 @@ import './css/GigCard.css';
 const GigCard = (props) => {
 	return(
 		<Link to={"/" + props.seller.username + "/" + props._id} className="card-box">
-			<div className="thumbnail" style={{backgroundImage: "url(" + props.images.thumbnail + ")"}}></div>
+			<div className="thumbnail" style={{backgroundImage: "url(" + props.images + ")"}}></div>
 			
 			<div className="text-box-top">
 				<Link to={"/" + props.seller.username}>
@@ -25,6 +25,7 @@ const GigCard = (props) => {
 			</div>
 			
 			<div className="text-box-bottom">
+				<small>{props.category} | {props.tags}</small><br/>
 				<i className="fas fa-map-marker-alt"></i> {props.location}
 			</div>
 		</Link>
