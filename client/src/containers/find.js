@@ -32,8 +32,10 @@ const filterOptions = [
 class Find extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { gigs: undefined, filter: undefined };	
+		this.state = { gigs: undefined, filter: undefined, tags: [] };	
 		this.handleSearch = this.handleSearch.bind(this);
+		this.toggleFilterMenu = this.toggleFilterMenu.bind(this);
+		this.toggleTag = this.toggleTag.bind(this);
 		this.handleTest = this.handleTest.bind(this);
 	}
 
@@ -51,15 +53,30 @@ class Find extends Component {
 		e.preventDefault();
 		const fd = e.target; // fd = formdata
 		const category = fd[0].value === "Category" ? "" : "&category=" + fd[0].value;
-		const tags = fd[1].value === "Tags" ? "" : "&tags=" + fd[1].value;
-		const distance = fd[2].value === "Max Distance" ? "" : "&distance=" + fd[2].value;
-		const sort = fd[3].value === "Sort" ? "" : "&sort=" + fd[3].value;
+		const input = fd[1].value || null;
+		const tags = this.state.tags == [] ? "" : "&tags=" + this.state.tags.join("+");
 		
-		const query = fd[4].value || null + "?" + category.toLowerCase() + tags + distance + sort;
-			
+		const query = input + "?" + category.toLowerCase() + tags.toLowerCase();
+console.log(query)
 		fetch('http://localhost:3001/api/search/' + encodeURI(query))
 			.then(res => res.json())
 			.then(gigs => this.setState({ gigs: gigs }))
+	}
+	toggleFilterMenu(e) {
+		this.state.filterMenu ? this.setState({ filterMenu: false }) : this.setState({ filterMenu: true });
+	}
+	toggleTag(e) {
+		const newTag = e.target.innerHTML;
+		const tags = this.state.tags;
+		console.log(newTag)
+
+		if (tags.indexOf(newTag) < 0) {
+			tags.push(newTag);
+			console.log(tags);
+		} else if (tags.indexOf(newTag) >= 0) {
+			tags.splice(tags.indexOf(newTag), 1);
+			console.log(tags);
+		}
 	}
 	handleTest() {
 		console.log(this.state)
@@ -78,6 +95,36 @@ class Find extends Component {
 				</div>
 			)
 		}	
+		const FilterMenu = (props) => {
+			console.log(props)
+			if (props.filterMenu) {
+				return (
+					<div className="filter-menu filter-menu-open">
+						<small className="big-search-more" onClick={ this.toggleFilterMenu }>less . . .</small>
+						<br/><em>selecting more than one tag is possible but leads to unintended behaviour</em><br/>
+						<div className="filter-menu-box">
+							<div className="filter-menu-circle" onClick={ this.toggleTag }>
+								<div>vegan</div>
+								<i className="fas fa-leaf"></i>
+							</div>
+							<div className="filter-menu-circle" onClick={ this.toggleTag }>
+								<div>swag</div>
+								<i className="fas fa-leaf"></i>
+							</div>
+							<div className="filter-menu-circle" onClick={ this.toggleTag }>
+								<div>bio</div>
+								<i className="fas fa-leaf"></i>
+							</div>
+						</div>
+					</div>
+				);
+			} else {
+				return (
+					<div className="filter-menu">
+						<small className="big-search-more" onClick={ this.toggleFilterMenu }>more . . .</small>
+					</div>
+				);}
+		}
 
 		if(this.props.client.isLoading) {
 			return( <h1 className="loading-screen">loading...</h1> )
@@ -87,17 +134,20 @@ class Find extends Component {
 			<div className="container">
 			<button onClick={ this.handleTest }>test</button>
 
-			<form onSubmit={this.handleSearch}>
-				<Filter />
-
 				<div className="head">
 					<h1>What do you need today?{ this.props.client.isLoading }</h1>
-					<div className="big-search-form">
+
+					<form className="big-search-form" onSubmit={this.handleSearch}>
+						<select>
+							{ filterOptions[0].map(str => <option>{ str }</option>) }
+						</select>
 						<input className="big-search-bar" type="text" placeholder="Find Services" />
 						<button className="big-search-submit" type="submit"><i className="fas fa-search"></i></button>
-					</div>
+					</form>
+					<br/>
+					<FilterMenu tags={ this.state.tags } filterMenu={ this.state.filterMenu } />
 				</div>
-			</form>
+			
 
 				<div className="card-container">
 					{this.state.gigs ? this.state.gigs.map((props, i) => { return( <GigCard {...props} key={i} /> ); }) : null}

@@ -37,7 +37,7 @@ exports.generateGigs = () => {
                 category: [ "fruits and vegetables", "meat and fish", "egg and milk products", "bread", "sweets and snacks", "frozen food", "beverages", "others",],
                 location: [ "Sistrans", "Ampass", "Innsbruck", "Völs", "Telfs", "Aldrans", "Wattens", "Riffian", "Hall in Tirol", "Arzl", "Thaur", "Imst", "Reutte", "Natters" ],
                 dateOfExpiry: [ "2018-06-20", "2018-08-12", "2018-06-01", "2018-09-20", "2018-03-09", "2018-08-26" ],
-                tags: [ "vegan", "swag" ],
+                tags: [ "vegan", "swag", "bio" ],
                 seller: {
                     username: ["HeinzSolutions", "attiimaster", "SchiemdMarkus", "DavidOnline", "Güglgül gül", "WebTech"],
                     image: ["https://www.stayathomemum.com.au/cache/860x380-0/wp-content/uploads/2015/12/bigstock-Bangkok-jan-A-Waxwork-Of-178261381-e1502062851153.jpg", "https://www.gannett-cdn.com/-mm-/65a45bca9f33902b2606c2e4b514d633b8e6864a/c=0-312-3147-2090&r=x803&c=1600x800/local/-/media/2017/11/14/USATODAY/USATODAY/636462879849725622-AP-People-Blake-Shelton.jpg", "https://cdn.aarp.net/content/dam/aarp/entertainment/Styles-and-Trends/2017/11/1140-famous-people-lost-john-hillerman.imgcache.rev2704554f25acc328d06d94aa0ec6ad6d.web.jpg"]
