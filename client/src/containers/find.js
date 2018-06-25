@@ -73,9 +73,11 @@ console.log(query)
 		if (tags.indexOf(newTag) < 0) {
 			tags.push(newTag);
 			console.log(tags);
+			this.setState({ tags: tags })
 		} else if (tags.indexOf(newTag) >= 0) {
 			tags.splice(tags.indexOf(newTag), 1);
 			console.log(tags);
+			this.setState({ tags: tags })
 		}
 	}
 	handleTest() {
@@ -100,18 +102,18 @@ console.log(query)
 			if (props.filterMenu) {
 				return (
 					<div className="filter-menu filter-menu-open">
-						<small className="big-search-more" onClick={ this.toggleFilterMenu }>less . . .</small>
-						<br/><em>selecting more than one tag is possible but leads to unintended behaviour</em><br/>
+						<small className="big-search-more" onClick={ props.toggleFilterMenu }>less . . .</small>
+						<br/><em>selecting more than one tag at once is possible but leads to unintended behaviour ({ props.tags.join(", ") || "no active tag" })</em><br/>
 						<div className="filter-menu-box">
-							<div className="filter-menu-circle" onClick={ this.toggleTag }>
+							<div className="filter-menu-circle" onClick={ props.toggleTag }>
 								<div>vegan</div>
 								<i className="fas fa-leaf"></i>
 							</div>
-							<div className="filter-menu-circle" onClick={ this.toggleTag }>
+							<div className="filter-menu-circle" onClick={ props.toggleTag }>
 								<div>swag</div>
 								<i className="fas fa-leaf"></i>
 							</div>
-							<div className="filter-menu-circle" onClick={ this.toggleTag }>
+							<div className="filter-menu-circle" onClick={ props.toggleTag }>
 								<div>bio</div>
 								<i className="fas fa-leaf"></i>
 							</div>
@@ -121,7 +123,7 @@ console.log(query)
 			} else {
 				return (
 					<div className="filter-menu">
-						<small className="big-search-more" onClick={ this.toggleFilterMenu }>more . . .</small>
+						<small className="big-search-more" onClick={ props.toggleFilterMenu }>more . . .</small>
 					</div>
 				);}
 		}
@@ -145,7 +147,7 @@ console.log(query)
 						<button className="big-search-submit" type="submit"><i className="fas fa-search"></i></button>
 					</form>
 					<br/>
-					<FilterMenu tags={ this.state.tags } filterMenu={ this.state.filterMenu } />
+					<FilterMenu tags={ this.state.tags } filterMenu={ this.state.filterMenu } toggleFilterMenu={ this.toggleFilterMenu } toggleTag={ this.toggleTag } />
 				</div>
 			
 
