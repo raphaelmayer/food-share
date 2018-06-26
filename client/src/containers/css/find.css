@@ -84,11 +84,15 @@
 	background: #eee9de;
 	border-radius: 50%;
 	box-shadow: 0px 0px 6px 1px silver;
+	cursor: pointer;
 	height: 70px;
 	margin: 0 20px;
 	overflow: hidden;
 	position: relative;
 	width: 70px;
+}
+.filter-menu-circle:hover {
+	box-shadow: 0px 0px 6px 1px #999;
 }
 .filter-menu-circle div {
 	color: white;

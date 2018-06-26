@@ -27,7 +27,7 @@ const ProfileHead = (props) => {
       <table className="profileHead-info">
         <tbody>
           <tr><td><i className="fas fa-map"></i> from</td><td>{ props.country }</td></tr>
-          <tr><td><i className="fas fa-user"></i> Member since</td><td>{ props.timestamp }</td></tr>
+          <tr><td><i className="fas fa-user"></i> Member since</td><td>{ props.createdAt.slice(0, 10) }</td></tr>
         </tbody>
       </table>
       :

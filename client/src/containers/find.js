@@ -69,15 +69,15 @@ console.log(query)
 						<br/><em>selecting more than one tag at once is possible but will lead to unintended behaviour <strong>({ props.tags.join(", ") || "no active tag" })</strong></em><br/>
 						<div className="filter-menu-box">
 							<div className="filter-menu-circle" onClick={ props.toggleTag }>
-								<div>vegan</div>
+								<div>Vegan</div>
 								<i className="fas fa-leaf"></i>
 							</div>
 							<div className="filter-menu-circle" onClick={ props.toggleTag }>
-								<div>swag</div>
+								<div>Swag</div>
 								<i className="fas fa-leaf"></i>
 							</div>
 							<div className="filter-menu-circle" onClick={ props.toggleTag }>
-								<div>bio</div>
+								<div>Bio</div>
 								<i className="fas fa-leaf"></i>
 							</div>
 						</div>

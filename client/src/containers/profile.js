@@ -49,7 +49,7 @@ class Profile extends Component {
 	
 						<div className="profile-main">
 							<h4>profile-main</h4>
-							{ user.gigs.map((gig, i) => <GigCard {...gig} key={i} />) }
+							{ user.gigs[0] ? user.gigs.map((gig, i) => <GigCard {...gig} key={i} />) : <em>No items found.</em> }
 						</div>
 
 						<div className="profile-description">

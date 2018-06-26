@@ -38,6 +38,7 @@ console.log(user);
     username: user.username, 
     _id: user._id,
     description: user.description,
+    createdAt: user.createdAt,
     country: user.country, 
     gigs: gigs, 
     reviews: reviews,
