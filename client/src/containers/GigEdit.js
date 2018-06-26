@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/GigEdit.css';
+import filterOptions from '../helpers/filterOptions';
 
 import { updateGig, deleteGig } from '../services/gig.service';
 
@@ -62,11 +63,7 @@ class GigEdit extends Component {
                         <div className="section-small">
                           <h4>Choose a category for your gig</h4>
                           <select className="styledInput" placeholder="category" type="input" required>
-                            <option>bread</option>
-                            <option>beverages</option>
-                            <option>meat and fish</option>
-                            <option>others</option>
-                            <option>milk and egg products</option>
+                            { filterOptions[0].map(str => <option>{ str }</option>) }
                           </select>
                         </div>
             			

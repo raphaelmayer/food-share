@@ -1,34 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
+import filterOptions from '../helpers/filterOptions';
 
 import GigCard from '../components/GigCard';
 import './css/find.css';
 
-const filterOptions = [
-	[
-	"Category",
-	"Fruits and Vegetables",
-	"Meat and Fish",
-	"Egg and Milk Products",
-	"Bread",
-	"Sweets and Snacks",
-	"Frozen Food",
-	"Beverages",
-	"Others",
-	], [
-	"Tags",
-	"vegan",
-	"swag",
-	], [
-	"Max Distance",
-	], [
-	"Sort",
-	"Distance",
-	"Date of Expiry",
-	]
-]
 class Find extends Component {
 	constructor(props) {
 		super(props);
@@ -56,7 +33,7 @@ class Find extends Component {
 		const input = fd[1].value || undefined;
 		const tags = "&tags=" + this.state.tags.join("+");
 		
-		const query = input + "?" + category.toLowerCase() + tags.toLowerCase();
+		const query = input + "?" + category + tags;
 console.log(query)
 		fetch('http://localhost:3001/api/search/' + encodeURI(query))
 			.then(res => res.json())
@@ -68,7 +45,6 @@ console.log(query)
 	toggleTag(e) {
 		const newTag = e.target.innerHTML;
 		const tags = this.state.tags;
-		console.log(newTag)
 
 		if (tags.indexOf(newTag) < 0) {
 			tags.push(newTag);
@@ -84,26 +60,13 @@ console.log(query)
 		console.log(this.state)
 	}
 
-	render() {
-		const Filter = () => {
-			return(
-				<div className="filter-container">
-					{ filterOptions.map(arr => 
-						<select>
-							{ arr.map(str => <option>{ str }</option>) }
-						</select>) 
-					}
-					
-				</div>
-			)
-		}	
+	render() {	
 		const FilterMenu = (props) => {
-			console.log(props)
 			if (props.filterMenu) {
 				return (
 					<div className="filter-menu filter-menu-open">
 						<small className="big-search-more" onClick={ props.toggleFilterMenu }>less . . .</small>
-						<br/><em>selecting more than one tag at once is possible but leads to unintended behaviour ({ props.tags.join(", ") || "no active tag" })</em><br/>
+						<br/><em>selecting more than one tag at once is possible but will lead to unintended behaviour <strong>({ props.tags.join(", ") || "no active tag" })</strong></em><br/>
 						<div className="filter-menu-box">
 							<div className="filter-menu-circle" onClick={ props.toggleTag }>
 								<div>vegan</div>
@@ -117,6 +80,14 @@ console.log(query)
 								<div>bio</div>
 								<i className="fas fa-leaf"></i>
 							</div>
+						</div>
+						<div>
+							<fieldset className="filter-menu-max-d">
+							    <legend>Set a Maximum Distance</legend>
+							    <label for="volume">1 km</label>
+							    <input type="range" id="start" name="volume" min="1" max="1000" />
+							    <label for="volume">1000 km</label>
+							</fieldset>
 						</div>
 					</div>
 				);
@@ -146,6 +117,8 @@ console.log(query)
 						<input className="big-search-bar" type="text" placeholder="Find Services" />
 						<button className="big-search-submit" type="submit"><i className="fas fa-search"></i></button>
 					</form>
+					<br/>
+					<em>Search Results: { this.state.gigs ? this.state.gigs.length : 0 }</em>
 					<br/>
 					<FilterMenu tags={ this.state.tags } filterMenu={ this.state.filterMenu } toggleFilterMenu={ this.toggleFilterMenu } toggleTag={ this.toggleTag } />
 				</div>

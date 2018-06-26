@@ -10,18 +10,17 @@ const GigCard = (props) => {
 			<div className="text-box-top">
 				<Link to={"/" + props.seller.username}>
 					<div className="text-box-profile-picture" style={{backgroundImage: "url(" + props.seller.image + ")"}}></div>
-					<div>{props.seller.username}</div>
-					<div className="grey">{props.seller.level}</div>
+					<div className="text-box-top-username">{props.seller.username}</div>
 				</Link>
 			</div>
 			
 			<div className="text-box-middle">
 				<div>{props.title}</div>
-				<div className="rating-box">
+				{/*<div className="rating-box">
 					<i className="fas fa-star"></i>
 					<div>{props.rating}</div>
 					<div className="grey">({props.reviewCount})</div>
-				</div>
+				</div>*/}
 			</div>
 			
 			<div className="text-box-bottom">

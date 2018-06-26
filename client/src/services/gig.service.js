@@ -1,4 +1,5 @@
 import post from '../helpers/post';
+import history from '../helpers/history';
 import { getToken } from '../services/auth.service';
 
 export function createGig(formdata) {
@@ -17,7 +18,7 @@ export function createGig(formdata) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		//this.props.history.push('/' + data.seller.username);
+      		history.push('/' + data.gig.seller.username);
 		})
 }
 
@@ -39,7 +40,7 @@ export function updateGig(formdata, id) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		//this.props.history.push('/' + data.seller.username);
+      		history.push('/' + data.gig.seller.username);
 		})
 }
 
@@ -49,6 +50,6 @@ export function deleteGig(id) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		this.props.history.push('/' + data.seller.username);
+      		history.push('/' + data.gig.seller.username);
 		})
 }

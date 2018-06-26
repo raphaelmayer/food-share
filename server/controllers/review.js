@@ -23,6 +23,6 @@ exports.deleteReview = (req, res, next) => {
     Review.findByIdAndRemove(req.params.id, (err, review) => {
 	    if (err) { res.json({ error: err }); }
 	    if (!review) { res.json({ missing: req.params.id }); }
-	    else { res.json({ success: 'DELETED ' + review._id }); }
+	    else { res.json({ success: 'DELETED ', _id: review._id, seller: review.seller }); }
     });
 }

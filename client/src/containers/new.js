@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/new.css';
+import filterOptions from '../helpers/filterOptions';
 
 import { createGig } from '../services/gig.service';
 
@@ -25,15 +26,11 @@ class New extends Component {
               <h4>Enter a title for your gig, like: "I make beautiful wedding photos!" (max. 50 characters).</h4>
               <input className="styledInput" placeholder="title" type="input" maxLength="50" required />
             </div>
-            
+
             <div className="section-small">
               <h4>Choose a category for your gig</h4>
               <select className="styledInput" placeholder="category" type="input" required>
-                <option>bread</option>
-                <option>beverages</option>
-                <option>meat and fish</option>
-                <option>others</option>
-                <option>milk and egg products</option>
+                { filterOptions[0].map(str => <option>{ str }</option>) }
               </select>
             </div>
             

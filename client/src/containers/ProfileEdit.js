@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/ProfileEdit.css';
 
 import { getToken } from '../services/auth.service';
-import { updateUser } from '../services/client.service';
+import { updateUser } from '../services/user.service';
 
 class ProfileEdit extends Component {
 	constructor(props) {

@@ -1,4 +1,5 @@
 import post from '../helpers/post';
+import history from '../helpers/history';
 import { getToken } from '../services/auth.service';
 
 export function createReview(formdata, seller) {
@@ -12,7 +13,10 @@ export function createReview(formdata, seller) {
 	post('/review/post', review)
 	.catch(err => console.error(err))
 	.then(res => res.json())
-	.then(data => console.log(data))
+	.then(data => {
+		console.log(data);
+		// history.push('/' + data.seller.username);	history.refresh ?
+	})
 }
 
 export function updateReview(formdata, id) {
@@ -26,12 +30,18 @@ export function updateReview(formdata, id) {
 	post('/review/update/' + id, review)
 	.catch(err => console.error(err))
 	.then(res => res.json())
-	.then(data => console.log(data))
+	.then(data => {
+		console.log(data);
+		// history.push('/' + data.seller.username);	history.refresh ?
+	})
 }
 
 export function deleteReview(id) {
 	post('/review/delete/' + id)
 	.catch(err => console.error(err))
 	.then(res => res.json())
-	.then(data => console.log(data))
+	.then(data => {
+		console.log(data);
+		// history.push('/' + data.seller.username);	history.refresh ?
+	})
 }

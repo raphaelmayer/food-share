@@ -47,7 +47,7 @@ module.exports = (app) => {
      const options = {}; 
      // null is whack => find.js
      if (p.input !== "undefined") options.title = { "$regex": p.input, "$options": "i" };
-     if (q.category !== "category") options.category = decodeURI(q.category);
+     if (q.category !== "Category") options.category = decodeURI(q.category);
      if (q.tags) options.tags = decodeURI(q.tags);
 console.log("options: ", options)
     Gig.find(options, {}, (err, items) => {
@@ -94,14 +94,16 @@ console.log("options: ", options)
 //========================== testing ===========================
 
   apiRoutes.get('/test', (req, res, next) => {
-    const count = 20; //determines the number of individual calls
+    const count = 50; //determines the number of individual calls
 
     for (let i=0; i<count;i++) {
       let x = helpers.generateGigs();
       let gig = new Gig(x);
       gig.save((err, gig) => {
-        if(err) console.error(err);
-        res.end('Error!');
+        if(err) {
+          console.error(err);
+          res.end('Error!', err);
+        }
       })
     }
     res.end('Success! ' + count + ' gigs have been created.');
