@@ -15,7 +15,8 @@ export function createReview(formdata, seller) {
 	.then(res => res.json())
 	.then(data => {
 		console.log(data);
-		// history.push('/' + data.seller.username);	history.refresh ?
+		console.log(history.location.pathname)
+		history.go(history.location.pathname);
 	})
 }
 
@@ -32,7 +33,8 @@ export function updateReview(formdata, id) {
 	.then(res => res.json())
 	.then(data => {
 		console.log(data);
-		// history.push('/' + data.seller.username);	history.refresh ?
+		console.log(history.location.pathname)
+		history.go(history.location.pathname);
 	})
 }
 
@@ -42,6 +44,7 @@ export function deleteReview(id) {
 	.then(res => res.json())
 	.then(data => {
 		console.log(data);
-		// history.push('/' + data.seller.username);	history.refresh ?
+		console.log(history.location.pathname)
+		history.go(history.location.pathname);
 	})
 }

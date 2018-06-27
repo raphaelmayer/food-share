@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/become-mentor.css';
+import './css/GetStarted.css';
 
 class GetStarted extends Component {
   render() {
@@ -30,6 +30,7 @@ class GetStarted extends Component {
                 <p>Registriere dich in weniger als 2 Minuten. Werde jetzt kostenlos Mitglied bei Fiverr.</p>
               </div>
             </div>
+            <br/>
             <button>Learn more</button>
           </div>
 

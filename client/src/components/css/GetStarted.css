@@ -1,0 +1,10 @@
+.guide-container {
+	display: inline-flex;
+}
+.guide-box {
+	margin: 20px 30px;
+	max-width: 300px;
+}
+.guide-icon {
+	font-size: 30px;
+}

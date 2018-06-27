@@ -74,7 +74,6 @@ class Gig extends Component {
               
             <div className="gig-location">
               <h4>Location</h4>
-              <div></div>
             </div>
   
             <ProfileHead isProfile={ false } { ...user } />  

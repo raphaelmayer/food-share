@@ -4,12 +4,13 @@ import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
 import filterOptions from '../helpers/filterOptions';
 
 import GigCard from '../components/GigCard';
+import { searchGigs } from '../services/client.service';
 import './css/find.css';
 
 class Find extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { gigs: undefined, filter: undefined, tags: [] };	
+		this.state = { gigs: undefined, filterMenu: false, tags: [] };	
 		this.handleSearch = this.handleSearch.bind(this);
 		this.toggleFilterMenu = this.toggleFilterMenu.bind(this);
 		this.toggleTag = this.toggleTag.bind(this);
@@ -28,16 +29,10 @@ class Find extends Component {
 
 	handleSearch(e) {
 		e.preventDefault();
-		const fd = e.target; // fd = formdata
-		const category = "&category=" + fd[0].value;
-		const input = fd[1].value || undefined;
-		const tags = "&tags=" + this.state.tags.join("+");
-		
-		const query = input + "?" + category + tags;
-console.log(query)
-		fetch('http://localhost:3001/api/search/' + encodeURI(query))
-			.then(res => res.json())
-			.then(gigs => this.setState({ gigs: gigs }))
+		searchGigs(e.target, this.state.tags)
+		.catch(err => console.error(err))
+		.then(res => res.json())
+		.then(d => this.setState({ gigs: d }))
 	}
 	toggleFilterMenu(e) {
 		this.state.filterMenu ? this.setState({ filterMenu: false }) : this.setState({ filterMenu: true });
@@ -48,11 +43,9 @@ console.log(query)
 
 		if (tags.indexOf(newTag) < 0) {
 			tags.push(newTag);
-			console.log(tags);
 			this.setState({ tags: tags })
 		} else if (tags.indexOf(newTag) >= 0) {
 			tags.splice(tags.indexOf(newTag), 1);
-			console.log(tags);
 			this.setState({ tags: tags })
 		}
 	}
@@ -68,18 +61,14 @@ console.log(query)
 						<small className="big-search-more" onClick={ props.toggleFilterMenu }>less . . .</small>
 						<br/><em>selecting more than one tag at once is possible but will lead to unintended behaviour <strong>({ props.tags.join(", ") || "no active tag" })</strong></em><br/>
 						<div className="filter-menu-box">
-							<div className="filter-menu-circle" onClick={ props.toggleTag }>
-								<div>Vegan</div>
-								<i className="fas fa-leaf"></i>
-							</div>
-							<div className="filter-menu-circle" onClick={ props.toggleTag }>
-								<div>Swag</div>
-								<i className="fas fa-leaf"></i>
-							</div>
-							<div className="filter-menu-circle" onClick={ props.toggleTag }>
-								<div>Bio</div>
-								<i className="fas fa-leaf"></i>
-							</div>
+							{ filterOptions[1].map((d, i) => {
+								return (
+									<div className="filter-menu-circle" onClick={ props.toggleTag }>
+										<div>{ filterOptions[1][i] }</div>
+										<i className="fas fa-leaf"></i>
+									</div>
+								);
+							})}
 						</div>
 						<div>
 							<fieldset className="filter-menu-max-d">
@@ -112,7 +101,7 @@ console.log(query)
 
 					<form className="big-search-form" onSubmit={this.handleSearch}>
 						<select>
-							{ filterOptions[0].map(str => <option>{ str }</option>) }
+							{ filterOptions[0].map(str => <option value={ str.value }>{ str.text }</option>) }
 						</select>
 						<input className="big-search-bar" type="text" placeholder="Find Services" />
 						<button className="big-search-submit" type="submit"><i className="fas fa-search"></i></button>

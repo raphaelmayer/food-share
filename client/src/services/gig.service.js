@@ -18,7 +18,7 @@ export function createGig(formdata) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.seller.username);
+      		history.push('/' + data.gig.seller.username + '/' + data.gig._id);
 		})
 }
 
@@ -40,7 +40,7 @@ export function updateGig(formdata, id) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.seller.username);
+      		history.push('/' + data.gig.seller.username + '/' + data.gig._id);
 		})
 }
 

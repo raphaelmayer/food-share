@@ -45,9 +45,9 @@ module.exports = (app) => {
     
     // not as errorprone
      const options = {}; 
-     // null is whack => find.js
+     // undefined is whack => find.js
      if (p.input !== "undefined") options.title = { "$regex": p.input, "$options": "i" };
-     if (q.category !== "Category") options.category = decodeURI(q.category);
+     if (q.category) options.category = decodeURI(q.category);
      if (q.tags) options.tags = decodeURI(q.tags);
 console.log("options: ", options)
     Gig.find(options, {}, (err, items) => {

@@ -30,7 +30,7 @@ class New extends Component {
             <div className="section-small">
               <h4>Choose a category for your gig</h4>
               <select className="styledInput" placeholder="category" type="input" required>
-                { filterOptions[0].map(str => <option>{ str }</option>) }
+                { filterOptions[0].map(str => <option value={ str.value }>{ str.text }</option>) }
               </select>
             </div>
             
