@@ -24,7 +24,7 @@ class Reviews extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		console.log('creating review ...');
-		createReview(e.target, this.props.seller);
+		createReview(e.target, this.props.subject);
 	}
 	handleUpdate(e) {
 		e.preventDefault();
@@ -38,7 +38,7 @@ class Reviews extends Component {
 	}
 	render() {
 	console.log("reviews.props", this.props)
-	const { reviews, seller } = this.props;
+	const { reviews, subject } = this.props;
 	const user = getToken().user;
 
 

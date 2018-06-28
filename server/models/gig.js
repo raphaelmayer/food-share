@@ -31,7 +31,7 @@ const GigSchema = new Schema({
 		enum: [ 'open', 'closed' ],
 		default: 'open'
 	},
-	seller: {
+	author: {
 		id: {
 			type: String,
 			required: true,

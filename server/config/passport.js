@@ -23,10 +23,23 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
-	secretOrKey: config.secret
+	secretOrKey: config.secret,
+	passReqToCallback: true
 };
 
-const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+const jwtLogin = new JwtStrategy(jwtOptions, (request, payload, done) => {
+	const author = { id: payload._id, username: payload.username }
+	console.log("payload: ", payload)
+	console.log("request.body.author: ", request.body.author )
+
+	// author no longer from token.user but this solution is not optimal
+	request.body.author = author;	
+	//if (request.body.author) {
+	//	console.log("payload-id: ", payload._id);
+	//	console.log("req.body-id: ", request.body.author.id);
+	//	console.log("ids are the same: ", payload._id === request.body.author.id && payload.username === request.body.author.username);
+	//}
+	
 	User.findById(payload._id, (err, user) => {
 		if(err) {return done(err, false)};
 

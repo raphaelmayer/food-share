@@ -69,7 +69,7 @@ class Gig extends Component {
   
             <div className="gig-reviews">
               <h4>Reviews</h4>
-              <Reviews seller={{ id: user._id, username: user.username }} reviews={ user.reviews } />
+              <Reviews subject={{ id: user._id, username: user.username }} reviews={ user.reviews } />
             </div>       
               
             <div className="gig-location">

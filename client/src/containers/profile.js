@@ -38,7 +38,7 @@ class Profile extends Component {
 				<div className="container">
 					<div>
 						<button type="button" onClick={this.handleTest}>test</button>
-						<EditButton onClick={() => this.setState( edit ? {edit:false}:{edit:true})} user={user.username} />
+						<EditButton onClick={() => this.setState( edit ? { edit:false }:{ edit:true })} user={ user.username } />
 					</div>
 					
 					{ edit ? user.gigs.map(gig => <Link to={ 'editgig/' + user.username + '/' + gig._id }>{ gig.title }</Link> ) : null }
@@ -59,7 +59,7 @@ class Profile extends Component {
 	
 						<div className="profile-reviews">
 							<h4>profile-reviews</h4>
-              				<Reviews seller={{ id: user._id, username: user.username }} reviews={ user.reviews } />
+              				<Reviews subject={{ id: user._id, username: user.username }} reviews={ user.reviews } />
 						</div>
 	
 					</div>

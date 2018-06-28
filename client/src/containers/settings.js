@@ -8,7 +8,8 @@ class Settings extends Component {
 		this.state = {}
 	}
   componentDidMount() {
-    
+    const token = JSON.parse(localStorage.getItem("accessToken"));
+    console.log(token)
   }
 
   render() {

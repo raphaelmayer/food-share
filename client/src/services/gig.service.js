@@ -11,14 +11,14 @@ export function createGig(formdata) {
 		dateOfExpiry: formdata[3].value,
 		location: formdata[4].value,
 		tags: formdata[5].value,
-		seller: { id: token.user._id, username: token.user.username },
+		//author: { id: token.user._id, username: token.user.username },
 	}
 	post('/gig/post', gig)
       	.catch(err => console.error(err))
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.seller.username + '/' + data.gig._id);
+      		history.push('/' + data.gig.author.username + '/' + data.gig._id);
 		})
 }
 
@@ -32,15 +32,15 @@ export function updateGig(formdata, id) {
 		dateOfExpiry: formdata[3].value,
 		location: formdata[4].value,
 		tags: formdata[5].value,
-		//	.seller nied unbedingt gut
-		//seller: { id: token.user._id, username: token.user.username },
+		//	.author nied unbedingt gut
+		//author: { id: token.user._id, username: token.user.username },
 	}
 	post('/gig/update/' + id, gig)
       	.catch(err => console.error(err))
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.seller.username + '/' + data.gig._id);
+      		history.push('/' + data.gig.author.username + '/' + data.gig._id);
 		})
 }
 
@@ -50,6 +50,6 @@ export function deleteGig(id) {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.seller.username);
+      		history.push('/' + data.gig.author.username);
 		})
 }

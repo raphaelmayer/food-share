@@ -16,6 +16,7 @@ exports.getGig = (req, res, next) => {
 }
 
 exports.createGig = (req, res, next) => {
+  console.log(req.headers)
   let gig = new Gig(req.body);
 
   gig.save((err, gig) => {

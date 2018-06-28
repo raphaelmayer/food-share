@@ -20,7 +20,7 @@ const ReviewSchema = new Schema({
 			required: true,
 		}
 	},
-	seller: {
+	subject: {
 		id: {
 			type: String,
 			required: true,

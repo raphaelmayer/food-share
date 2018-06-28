@@ -4,13 +4,13 @@ import './css/GigCard.css';
 
 const GigCard = (props) => {
 	return(
-		<Link to={"/" + props.seller.username + "/" + props._id} className="card-box">
+		<Link to={"/" + props.author.username + "/" + props._id} className="card-box">
 			<div className="thumbnail" style={{backgroundImage: "url(" + props.images + ")"}}></div>
 			
 			<div className="text-box-top">
-				<Link to={"/" + props.seller.username}>
-					<div className="text-box-profile-picture" style={{backgroundImage: "url(" + props.seller.image + ")"}}></div>
-					<div className="text-box-top-username">{props.seller.username}</div>
+				<Link to={"/" + props.author.username}>
+					<div className="text-box-profile-picture" style={{backgroundImage: "url(" + props.author.image + ")"}}></div>
+					<div className="text-box-top-username">{props.author.username}</div>
 				</Link>
 			</div>
 			

@@ -8,7 +8,6 @@ export function updateUser(formdata) {
     	description: formdata[0].value,
 		country: formdata[1].value,
 		profilePicture: formdata[2].value,
-		seller: { id: token.user._id, username: token.user.username },
 	}
 	post('/user/update/' + token.user._id, user)
       	.catch(err => console.error(err))

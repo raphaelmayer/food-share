@@ -27,12 +27,42 @@ nav {
 	display: inline-flex;
 }
 .nav-btn {
+	cursor: pointer;
 	margin: 0 10px;
 	padding: 10px;
+	transition: all 0.2s ease;
 }
 .nav-btn:hover {
-	cursor: pointer;
+	color: orange;
 }
+
+.nb-search {
+	display: flex;
+	transition: all 0.3s ease;
+	width: 58px;
+}
+.nb-search:hover {
+	width: 210px;
+}
+.nb-search-input {
+	background: #eee;
+	border: none;
+	border-radius: 5px;
+	margin: 0;
+	margin-right: 15px;
+	padding: 0;
+	transition: all 0.3s ease;
+	width: 0;
+}
+.nb-search:hover .nb-search-input {
+	padding: 2px 5px;
+	width: 90%;
+}
+.nb-search .fa-search {
+	margin: auto;
+	margin-right: 0;
+}
+
 .nav-profile-box {
 	background: #555;
 	border-right: 10px solid white;

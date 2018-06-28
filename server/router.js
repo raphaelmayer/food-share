@@ -12,6 +12,9 @@ const Gig = require('./models/gig');  //für test
 //auth middleware
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
+const requireOwner = () => {
+  
+}
 
 //role types
 const REQUIRE_OWNER = "Owner",
