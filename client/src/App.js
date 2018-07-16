@@ -8,6 +8,8 @@ import { alertActions } from './_actions/alert.actions';
 import PrivateRoute from './components/PrivateRoute';
 import { store } from './helpers/store';
 
+import Chat from './containers/Chat';
+
 import { Nav } from './containers/nav';
 import GetStarted from './components/GetStarted';
 import Profile from './containers/profile';
@@ -55,6 +57,7 @@ class App extends Component {
               <Route path="/settings" component={ Settings } />
               
               <PrivateRoute exact path="/editprofile" component={ ProfileEdit } />
+              <Route exact path="/chat" component={ Chat } />
               <PrivateRoute path="/editgig/:username/:gigTitle" component={ GigEdit } />
     
               <Route path="/:username/:gigTitle" component={ Gig } />

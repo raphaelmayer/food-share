@@ -4,7 +4,8 @@ const express = require('express'),
 				logger = require('morgan'),
 				mongoose = require('mongoose'),
 				config = require('./config/main'),
-				router = require('./router');
+				router = require('./router'),
+				socketIO = require('./socketIO');
 
 
 mongoose.connect(config.database);
@@ -31,4 +32,7 @@ app.get('/', (req, res) => {
 const server = app.listen(config.port);
 console.log('Your server is running on port ' + config.port + '.');
 
+socketIO(server);
+
 router(app);
+
