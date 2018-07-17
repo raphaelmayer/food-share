@@ -84,6 +84,23 @@ exports.register = function(req, res, next) {
     });
 };
 
+// middleware to check if the user is the owner of the requested items.
+exports.requireOwnership = (req, res, next) => {
+  jwt.verify(req.headers.authorization.split(" ")[1], config.secret, (err, decoded) => {
+
+    if (err) {
+      res.status(422).json({ error: "Token not valid." });
+      return next(err);
+    }
+    if (decoded._id) {
+      res.locals.id = decoded._id;
+      return next();
+    }
+    res.status(401).json({ error: 'You are not authorized to view this content.(owner)' });
+    return next('Unauthorized');
+  })
+}
+
 // Role authorization check
 exports.roleAuthorization = function(role) {  
     return function(req, res, next) {
@@ -100,7 +117,7 @@ exports.roleAuthorization = function(role) {
             return next();
           }
 
-          res.status(401).json({ error: 'You are not authorized to view this content.' });
+          res.status(401).json({ error: 'You are not authorized to view this content.(role)' });
           return next('Unauthorized');
       });
     };

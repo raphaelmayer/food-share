@@ -18,17 +18,25 @@ exports.getUser = (req, res) => {
 }
 
 exports.updateUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, user) => {
-    if (err) console.error(err);
-    if (!user) res.json({ error: 'no such user' });
-    res.json(user);
-  });
+  if (req.params.id === res.locals.id) {
+    User.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, user) => {
+      if (err) console.error(err);
+      if (!user) res.json({ error: 'no such user' });
+      res.json(user);
+    });
+  } else {
+    console.error("U user", "Unauthorized.")
+  }
 }
 
 exports.deleteUser = (req, res) => {
-  User.findByIdAndRemove(req.params.id, (err, user) => {
-    if (err) console.error(err);
-    if (!user) res.json({ error: 'no such user' });
-    res.json({ success: 'user removed.'});
-  });
+  if (req.params.id === res.locals.id) {
+    User.findByIdAndRemove(req.params.id, (err, user) => {
+      if (err) console.error(err);
+      if (!user) res.json({ error: 'no such user' });
+      res.json({ success: 'user removed.'});
+    });
+  } else {
+    console.error("D user", "Unauthorized.")
+  }
 }

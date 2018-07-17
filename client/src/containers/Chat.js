@@ -29,8 +29,10 @@ class Chat extends Component {
 
     this.sendMessage = (e) => {
       e.preventDefault();
+      // get recipient
       this.socket.emit('SEND_MESSAGE', {
           // author: token.username, // gets appended on server from a valid jwt
+          // recipient: this.state.profile._id (wenn als btn in Gig / Profile)
           message: this.state.message
       });
       this.setState({ message: '' });

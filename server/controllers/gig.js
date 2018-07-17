@@ -26,7 +26,8 @@ exports.createGig = (req, res, next) => {
 }
 
 exports.updateGig = (req, res, next) => {
-  Gig.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, gig) => {
+  const query = { _id: req.params.id, "author.id": res.locals.id };
+  Gig.findOneAndUpdate(query, { $set: req.body }, (err, gig) => {
     if (err) console.error(err);
     if (!gig) res.json({ error: 'no such gig' });
     console.log(gig);
@@ -35,9 +36,23 @@ exports.updateGig = (req, res, next) => {
 }
 
 exports.deleteGig = (req, res, next) => {
-  Gig.findByIdAndRemove(req.params.id, (err, gig) => {
+  const query = { _id: req.params.id, "author.id": res.locals.id };
+  Gig.findOneAndRemove(query, (err, gig) => {
     if (err) console.error(err);
     if (!gig) res.json({ error: 'no such gig' });
     res.json({ success: 'gig removed.', gig: gig });
+  });
+}
+
+exports.updateGigStatus = (req, res, next) => {
+  console.log(req.body.status);
+  const query = { _id: req.params.id, "author.id": res.locals.id };
+  Gig.findOneAndUpdate(query, { status: req.body.status }, (err, gig) => {
+    if (err) console.error(err);
+    if (!gig) res.json({ error: 'no such gig' });
+    else { 
+      console.log(gig);
+      res.json({ success: 'gig updated.', gig: gig });
+    }
   });
 }

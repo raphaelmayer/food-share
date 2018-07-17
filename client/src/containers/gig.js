@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './css/gig.css';
 
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
+import { getMessages, sendMessage } from '../services/message.service';
 
 import Reviews from '../components/Reviews';
 import ProfileHead from '../components/ProfileHead';
@@ -15,9 +16,10 @@ class Gig extends Component {
     this.state = { user: { gigs: [] } }
     
     this.handleClick = this.handleClick.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { getMessages("5b268d8988d94527b0a35a55");
     const { dispatch } = this.props;
     const url = window.location.pathname.split('/');
     
@@ -34,6 +36,15 @@ class Gig extends Component {
     console.log(this.state);
   }
 
+  sendMessage(e) {
+    e.preventDefault();
+    const recipient = {
+      id: this.state.user._id,
+      username: this.state.user.username
+    }
+    sendMessage(e.target, recipient);
+  }
+
   render() {
     const { user } = this.state;
     const url = window.location.pathname.split('/');
@@ -43,8 +54,7 @@ class Gig extends Component {
     if(gig) {
       return (
         <div className="container">
-  
-        <button onClick={this.handleClick}>test</button>
+        <button onClick={ this.handleClick }>test</button>
         <Link to={ '/editgig/' + user.username + '/' + gig._id } >
           <EditButton onClick={ () => console.log('todo') } user={ user.username } />
         </Link>
@@ -74,6 +84,14 @@ class Gig extends Component {
               
             <div className="gig-location">
               <h4>Location</h4>
+            </div>     
+              
+            <div className="gig-contact">
+              <h4>Contact</h4>
+              <form onSubmit={ this.sendMessage }>
+                  <textarea rows="5" cols="38" placeholder="Your Message..." required ></textarea>
+                  <button type="submit">Send a Message</button>
+              </form>
             </div>
   
             <ProfileHead isProfile={ false } { ...user } />  

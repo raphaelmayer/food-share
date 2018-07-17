@@ -2,6 +2,7 @@ const AuthController = require('./controllers/authentication'),
   reviewController = require('./controllers/review'),
   gigController = require('./controllers/gig'),
   userController = require('./controllers/user'),
+  messageController = require('./controllers/message'),
 	express = require('express'),
 	passportService = require('./config/passport'),
 	passport = require('passport'),
@@ -12,9 +13,7 @@ const Gig = require('./models/gig');  //für test
 //auth middleware
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
-const requireOwner = () => {
-  
-}
+const requireOwner = AuthController.requireOwnership;
 
 //role types
 const REQUIRE_OWNER = "Owner",
@@ -68,9 +67,9 @@ console.log("options: ", options)
   
   apiRoutes.get('/user/get/:id', userController.getUser);
 
-  apiRoutes.post('/user/update/:id', requireAuth, userController.updateUser);
+  apiRoutes.post('/user/update/:id', requireOwner, userController.updateUser);
 
-  apiRoutes.post('/user/delete/:id', requireAuth, userController.deleteUser);
+  apiRoutes.post('/user/delete/:id', requireOwner, userController.deleteUser);
 
 //========================== gigs ===========================
 
@@ -80,9 +79,11 @@ console.log("options: ", options)
 
   apiRoutes.post('/gig/post', requireAuth, gigController.createGig);
 
-  apiRoutes.post('/gig/update/:id', requireAuth, gigController.updateGig);
+  apiRoutes.post('/gig/update/:id', requireOwner, gigController.updateGig);
 
-  apiRoutes.post('/gig/delete/:id', requireAuth, gigController.deleteGig);
+  apiRoutes.post('/gig/delete/:id', requireOwner, gigController.deleteGig);
+
+  apiRoutes.post('/gig/status/:id', requireOwner, gigController.updateGigStatus);
 
 //========================== reviews ===========================
 
@@ -90,9 +91,15 @@ console.log("options: ", options)
 
   apiRoutes.post('/review/post', requireAuth, reviewController.createReview);
 
-  apiRoutes.post('/review/update/:id', requireAuth, reviewController.updateReview);
+  apiRoutes.post('/review/update/:id', requireOwner, reviewController.updateReview);
 
-  apiRoutes.post('/review/delete/:id', requireAuth, reviewController.deleteReview);
+  apiRoutes.post('/review/delete/:id', requireOwner, reviewController.deleteReview);
+
+//========================== messages ===========================
+
+  apiRoutes.get('/message/get', requireOwner, messageController.getMessages);
+
+  apiRoutes.post('/message/post', requireAuth, messageController.createMessage);
 
 //========================== testing ===========================
 

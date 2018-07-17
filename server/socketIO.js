@@ -36,14 +36,14 @@ io.on('connection', (socket) => {
 	socket.on('TEST', handleTest)
 	
   	socket.on('disconnect', () => {
-  	  	console.log('user disconnected: ', socket.id)
+  	  	console.log('user disconnected: ', socket.id);
   	  	// handleDisconnect()
   	})
-//
-//  socket.on('error', (err) => {
-//    console.log('received error from socket:', socket.id)
-//    console.log(err)
-//  })
+
+  	socket.on('error', (err) => {
+  	  	console.log('received error from socket:', socket.id);
+  	  	console.log(err);
+  	})
 })
 
 }

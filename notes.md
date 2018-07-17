@@ -33,3 +33,9 @@
 	- GeoLocation
 	- GeoCoding
 - provide images for common items
+
+
+IMPORTANT: 
+requireAuth: checks token and sets req.body.author (setAuthor?)
+
+requireOwner: checks token and passes ownerId to res.locals.id 

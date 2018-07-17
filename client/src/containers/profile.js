@@ -7,6 +7,8 @@ import ProfileHead from '../components/ProfileHead';
 import EditButton from '../components/EditButton';
 import Reviews from '../components/Reviews';
 
+import { updateGigStatus } from '../services/gig.service';
+
 class Profile extends Component {
 	constructor(props) {
 		super(props);
@@ -27,6 +29,7 @@ class Profile extends Component {
     handleTest(e) {
     	e.preventDefault();
     	console.log(this.state);
+    	updateGigStatus({ status: "pending" }, 12345)
     }
 
 	render() {

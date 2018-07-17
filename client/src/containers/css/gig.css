@@ -5,6 +5,7 @@
 	grid-gap: 20px;
 	grid-template-areas: ' main main prHead '
 						 ' main main loc '
+						 ' rev rev con '
 						 ' rev rev ... ';
 	text-align: left;
 }
@@ -18,6 +19,7 @@
 	text-align: center;
 	width: 33%;
 }
+
 .gig-main {
 	border: 1px solid #eee;
 	grid-area: main;
@@ -38,11 +40,28 @@
 .gig-title {
 	text-align: center;
 }
+
 .gig-reviews {
 	border: 1px solid #eee;
 	grid-area: rev;
 	padding: 10px 20px;
 }
+
+.gig-contact {
+	border: 1px solid #eee;
+	grid-area: con;
+	padding: 10px 20px;
+}
+.gig-contact form {
+	text-align: center;
+}
+.gig-contact textarea {
+	display: block;
+	resize: none;
+	width: 100%;
+}
+.gig-contact button {}
+
 .gig-location {
 	border: 1px solid #eee;
 	grid-area: loc;

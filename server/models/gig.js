@@ -28,7 +28,7 @@ const GigSchema = new Schema({
 	status: {
 		type: String,
 		required: true,
-		enum: [ 'open', 'closed' ],
+		enum: [ 'open', 'pending', 'closed' ],
 		default: 'open'
 	},
 	author: {

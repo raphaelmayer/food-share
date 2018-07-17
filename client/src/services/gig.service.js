@@ -53,3 +53,10 @@ export function deleteGig(id) {
       		history.push('/' + data.gig.author.username);
 		})
 }
+
+export function updateGigStatus(newStatus, id) {
+	post('/gig/status/' + id, newStatus)
+		.catch(err => console.error(err))
+		.then(res => res.json())
+		.then(data => console.log(data));
+}
