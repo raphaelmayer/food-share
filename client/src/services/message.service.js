@@ -1,11 +1,19 @@
 import post from '../helpers/post';
 import authHeader from '../helpers/auth-header';
 
+// export function getMessages(ownerId) {
+//     fetch('/api/message/get', { headers: authHeader() })
+//         .catch(err => console.error(err))
+//         .then(res => res.json())
+//         .then(data => console.log(data))
+// }
+
 export function getMessages(ownerId) {
-    fetch('/api/message/get', { headers: authHeader() })
-        .catch(err => console.error(err))
-        .then(res => res.json())
-        .then(data => console.log(data))
+    return fetch('/api/message/get', { headers: authHeader() })
+}
+
+export function getConversations() {
+    return fetch('/api/message/get', { headers: authHeader() })
 }
 
 export function sendMessage(formdata, recipient) {  

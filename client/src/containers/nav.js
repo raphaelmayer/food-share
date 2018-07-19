@@ -51,6 +51,7 @@ class Nav extends Component {
         	 	  
               <div className="nav-btns">
                 <form to="/search" className="nav-btn nb-search"><input placeholder="Search for something..." className="nb-search-input"/><i className="fas fa-search"></i></form>
+                <Link to="/message" className="nav-btn"><i className="fas fa-envelope"></i></Link>
                 <Link to="/new" className="nav-btn"><i className="fas fa-plus"></i></Link>
             		<Link to="/getstarted" className="nav-btn">Get Started</Link>
             		<div className="nav-btn nav-profile-box" onClick={this.openUserMenu}>

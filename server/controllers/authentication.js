@@ -89,7 +89,7 @@ exports.requireOwnership = (req, res, next) => {
   jwt.verify(req.headers.authorization.split(" ")[1], config.secret, (err, decoded) => {
 
     if (err) {
-      res.status(422).json({ error: "Token not valid." });
+      res.status(422).json({ error: err });
       return next(err);
     }
     if (decoded._id) {

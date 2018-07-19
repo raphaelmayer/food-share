@@ -29,3 +29,13 @@ const MessageSchema = new Schema({
 }, {timestamps: true});
 
 module.exports = mongoose.model('Message', MessageSchema);
+
+
+/*
+conversation = {
+	id
+	person1-id
+	person2-id
+	messages
+}
+*/
