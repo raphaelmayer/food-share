@@ -1,18 +1,16 @@
 import post from '../helpers/post';
 import authHeader from '../helpers/auth-header';
 
-// export function getMessages(ownerId) {
-//     fetch('/api/message/get', { headers: authHeader() })
-//         .catch(err => console.error(err))
-//         .then(res => res.json())
-//         .then(data => console.log(data))
-// }
 
-export function getMessages(ownerId) {
-    return fetch('/api/message/get', { headers: authHeader() })
+export function getInbox() {
+    return fetch('/api/message/getInbox', { headers: authHeader() })
 }
 
-export function getConversations() {
+export function getOutbox() {
+    return fetch('/api/message/getOutbox', { headers: authHeader() })
+}
+
+export function getMessages(ownerId) {
     return fetch('/api/message/get', { headers: authHeader() })
 }
 
@@ -27,4 +25,10 @@ export function sendMessage(formdata, recipient) {
         .catch(err => console.error(err))
         .then(res => res.json())
         .then(data => console.log(data))
+}
+
+// functions for conversation model; not in use
+
+export function getConversations() {
+    return fetch('/api/message/get', { headers: authHeader() })
 }

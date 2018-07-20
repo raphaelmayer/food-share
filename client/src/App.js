@@ -12,7 +12,7 @@ import Chat from './containers/Chat';
 
 import { Nav } from './containers/nav';
 import GetStarted from './components/GetStarted';
-import Message from './components/Message';
+import Messages from './containers/Messages';
 import Profile from './containers/profile';
 import ProfileEdit from './containers/ProfileEdit';
 import GigEdit from './containers/GigEdit';
@@ -56,7 +56,7 @@ class App extends Component {
               <Route path="/login" component={ Login } />
               <Route path="/getstarted" component={ GetStarted } />
               <Route path="/settings" component={ Settings } />
-              <Route path="/message" component={ Message } />
+              <Route path="/messages" component={ Messages } />
               
               <PrivateRoute exact path="/editprofile" component={ ProfileEdit } />
               <Route exact path="/chat" component={ Chat } />

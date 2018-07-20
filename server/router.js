@@ -99,6 +99,12 @@ console.log("options: ", options)
 
   apiRoutes.get('/message/get', requireOwner, messageController.getMessages);
 
+  apiRoutes.get('/message/getInbox', requireOwner, messageController.getInbox);
+
+  apiRoutes.get('/message/getOutbox', requireOwner, messageController.getOutbox);
+
+  apiRoutes.get('/message/hasBeenRead/:id', messageController.updateNewStatus);
+
   apiRoutes.post('/message/post', requireAuth, messageController.createMessage);
 
 //========================== testing ===========================
