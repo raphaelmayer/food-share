@@ -55,8 +55,8 @@ class App extends Component {
               <Route path="/register" component={ Register } />
               <Route path="/login" component={ Login } />
               <Route path="/getstarted" component={ GetStarted } />
-              <Route path="/settings" component={ Settings } />
-              <Route path="/messages" component={ Messages } />
+              <PrivateRoute path="/settings" component={ Settings } />
+              <PrivateRoute path="/messages" component={ Messages } />
               
               <PrivateRoute exact path="/editprofile" component={ ProfileEdit } />
               <Route exact path="/chat" component={ Chat } />

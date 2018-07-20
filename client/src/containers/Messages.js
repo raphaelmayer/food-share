@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './css/Messages.css';
 
-import { getMessages, getInbox, getOutbox } from '../services/message.service';
+import MessageBox from '../components/MessageBox';
+
+import { getInbox, getOutbox, updateReadStatus } from '../services/message.service';
 
 class Message extends Component {
 	constructor(props) {
@@ -15,8 +17,6 @@ class Message extends Component {
 
     componentDidMount() {
         getInbox()
-        .catch(err => console.error(err))
-        .then(res => res.json())
         .then(data => {
             console.log(data);
             this.setState({ messages: data })
@@ -31,42 +31,29 @@ class Message extends Component {
         switch(activeTab) {
             case "inbox":
                 getInbox()
-                .catch(err => console.error(err))
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    this.setState({ messages: data });
-                });
+                .then( data => this.setState({ messages: data }) );
                 break;
+
             case "outbox":
                 getOutbox()
-                .catch(err => console.error(err))
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    this.setState({ messages: data });
-                });
+                .then( data => this.setState({ messages: data }) );
                 break;
+
             default: console.error("handleActiveTab default case");
         }
     }
 
-    handleActiveMessage(e, id) {
-        fetch("http://localhost:3001/api/message/hasBeenRead/" + id)
-        .then(res => res.json())
-        .then(msg => console.log(msg))  // eventually replace old msg with new one
+    handleActiveMessage(e, msg) {
+        updateReadStatus(msg);
 
-        const msg = this.state.activeMsg;
-
-        msg === id ? 
-        this.setState({ activeMsg: null }) :
-        this.setState({ activeMsg: id })
+        this.state.activeMsg === msg._id 
+        ? 
+        this.setState({ activeMsg: null }) 
+        : 
+        this.setState({ activeMsg: msg._id })
     }
 
-
     handleSubmit(e) {}
-
-    handleDelete(e) {}
 
     handleTest(e) { console.log(this.state) }
 	    
@@ -82,7 +69,7 @@ class Message extends Component {
                 </div>    
                 <div className="messages-container">
                 {
-                    messages !== null ? messages.map((msg, i) => <MessageBox msg={ msg } activeTab={ activeTab } activeMsg={ activeMsg } onClick={ this.handleActiveMessage } />) : "No messages yet"
+                    messages !== null ? messages.map((msg, i) => <MessageBox msg={ msg } activeTab={ activeTab } activeMsg={ activeMsg } onClick={ this.handleActiveMessage } key={i} />) : "No messages yet"
                 }
                 </div>
 			</div>	
@@ -91,27 +78,3 @@ class Message extends Component {
 }
 
 export default Message;
-
-const MessageBox = (props) => {
-    const { msg, activeTab, onClick, activeMsg } = props;
-    const isOpen = false;
-
-console.log(props)
-if (activeMsg === msg._id) {
-    return (
-        <div onClick={ (e) => onClick(e, msg._id) } className={ "msg-box msg-box-active" }>
-            <div className="msg-box-name">{ activeTab === "inbox" ? "from " + msg.author.username : "to " + msg.recipient.username }</div>
-            <small className="msg-box-date"> { msg.updatedAt.slice(0, 16) }</small>
-            <div className="msg-box-text">{ msg.text }</div>
-        </div>
-    );
-} else {
-    return (
-        <div onClick={ (e) => onClick(e, msg._id) } className={ msg.new ? "msg-box msg-box-new" : "msg-box" }>
-            <div className="msg-box-name">{ activeTab === "inbox" ? "from " + msg.author.username : "to " + msg.recipient.username }</div>
-            <small className="msg-box-date"> { msg.updatedAt.slice(0, 16) }</small>
-            <div className="msg-box-text">{ msg.text }</div>
-        </div>
-    );
-}
-}

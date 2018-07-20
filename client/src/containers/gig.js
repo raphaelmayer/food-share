@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './css/gig.css';
 
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
-import { getMessages, sendMessage } from '../services/message.service';
+import { sendMessage } from '../services/message.service';
 
 import Reviews from '../components/Reviews';
 import ProfileHead from '../components/ProfileHead';
@@ -19,7 +19,7 @@ class Gig extends Component {
     this.sendMessage = this.sendMessage.bind(this);
   }
 
-  componentDidMount() { getMessages("5b268d8988d94527b0a35a55");
+  componentDidMount() {
     const { dispatch } = this.props;
     const url = window.location.pathname.split('/');
     

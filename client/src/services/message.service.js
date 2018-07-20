@@ -3,32 +3,46 @@ import authHeader from '../helpers/auth-header';
 
 
 export function getInbox() {
-    return fetch('/api/message/getInbox', { headers: authHeader() })
+  return new Promise((resolve, reject) => {
+    fetch('/api/message/getInbox', { headers: authHeader() })
+      .catch(err => {
+        console.error(err);
+        reject(err);
+      })
+      .then(res => res.json())
+      .then(data => resolve(data)) 
+  })
 }
 
 export function getOutbox() {
-    return fetch('/api/message/getOutbox', { headers: authHeader() })
-}
-
-export function getMessages(ownerId) {
-    return fetch('/api/message/get', { headers: authHeader() })
+  return new Promise((resolve, reject) => {
+    fetch('/api/message/getOutbox', { headers: authHeader() })
+      .catch(err => {
+        console.error(err);
+        reject(err);
+      })
+      .then(res => res.json())
+      .then(data => resolve(data)) 
+  })
 }
 
 export function sendMessage(formdata, recipient) {  
-    const msg = {
-      // author: {}, // gets populated from a validated token on the server
-      recipient: recipient,
-      text: formdata[0].value,
-    }
+  const msg = {
+    // author: {}, // gets populated from a validated token on the server
+    recipient: recipient,
+    text: formdata[0].value,
+  }
 
-    post('/message/post', msg)
-        .catch(err => console.error(err))
-        .then(res => res.json())
-        .then(data => console.log(data))
+  post('/message/post', msg)
+    .catch(err => console.error(err))
+    .then(res => res.json())
+    .then(data => console.log(data))
 }
 
-// functions for conversation model; not in use
+export const updateReadStatus = (msg) => {
+  if (!msg.new) return;
 
-export function getConversations() {
-    return fetch('/api/message/get', { headers: authHeader() })
+  fetch("http://localhost:3001/api/message/updateReadStatus/" + msg._id)
+  .then(res => res.json())
+  .then(msg => console.log(msg))  // eventually replace old msg in state with the new one
 }

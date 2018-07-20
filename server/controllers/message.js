@@ -26,7 +26,7 @@ exports.getMessages = (req, res, next) => {
     res.end();
 }
 
-exports.updateNewStatus = (req, res, next) => {
+exports.updateReadStatus = (req, res, next) => {
   Message.findByIdAndUpdate(req.params.id, { $set: { new: false } }, (err, msg) => {
     if (err) console.error(err);
     if (msg) res.json(msg); 

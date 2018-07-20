@@ -50,7 +50,7 @@ class Nav extends Component {
       		  	{ this.state.userMenu ? <UserMenu user={this.props.auth.user || 'Login'} /> : null }
         	 	  
               <div className="nav-btns">
-                <form to="/search" className="nav-btn nb-search"><input placeholder="Search for something..." className="nb-search-input"/><i className="fas fa-search"></i></form>
+                <Link to="/" className="nav-btn nb-search"><i className="fas fa-search"></i></Link>
                 <Link to="/messages" className="nav-btn"><i className="fas fa-envelope"></i></Link>
                 <Link to="/new" className="nav-btn"><i className="fas fa-plus"></i></Link>
             		<Link to="/getstarted" className="nav-btn">Get Started</Link>

@@ -103,7 +103,7 @@ console.log("options: ", options)
 
   apiRoutes.get('/message/getOutbox', requireOwner, messageController.getOutbox);
 
-  apiRoutes.get('/message/hasBeenRead/:id', messageController.updateNewStatus);
+  apiRoutes.get('/message/updateReadStatus/:id', messageController.updateReadStatus);
 
   apiRoutes.post('/message/post', requireAuth, messageController.createMessage);
 
