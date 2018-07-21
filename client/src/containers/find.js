@@ -101,7 +101,7 @@ class Find extends Component {
 
 					<form className="big-search-form" onSubmit={this.handleSearch}>
 						<select>
-							{ filterOptions[0].map(str => <option value={ str.value }>{ str.text }</option>) }
+							{ filterOptions[0].map((str, i) => <option value={ str.value } key={i}>{ str.text }</option>) }
 						</select>
 						<input className="big-search-bar" type="text" placeholder="Find Services" />
 						<button className="big-search-submit" type="submit"><i className="fas fa-search"></i></button>

@@ -3,7 +3,7 @@ import './css/Messages.css';
 
 import MessageBox from '../components/MessageBox';
 
-import { getInbox, getOutbox, updateReadStatus } from '../services/message.service';
+import { getInbox, getOutbox, updateReadStatus, sendMessage } from '../services/message.service';
 
 class Message extends Component {
 	constructor(props) {
@@ -45,15 +45,18 @@ class Message extends Component {
 
     handleActiveMessage(e, msg) {
         updateReadStatus(msg);
-
-        this.state.activeMsg === msg._id 
-        ? 
-        this.setState({ activeMsg: null }) 
-        : 
-        this.setState({ activeMsg: msg._id })
+        this.setState({ activeMsg: msg._id });
     }
 
-    handleSubmit(e) {}
+    handleSubmit(e, msg) {
+        e.preventDefault();
+        const recipient = { username: msg.author.username, id: msg.author.id };
+        // const recipient = (msg) => {
+        //     if (this.state.activeTab === "inbox") return { username: msg.author.username, id: msg.author.id }
+        //     else return { username: msg.recipient.username, id: msg.recipient.id }
+        // }
+        sendMessage(e.target, recipient);
+    }
 
     handleTest(e) { console.log(this.state) }
 	    
@@ -69,7 +72,7 @@ class Message extends Component {
                 </div>    
                 <div className="messages-container">
                 {
-                    messages !== null ? messages.map((msg, i) => <MessageBox msg={ msg } activeTab={ activeTab } activeMsg={ activeMsg } onClick={ this.handleActiveMessage } key={i} />) : "No messages yet"
+                    messages !== null ? messages.map((msg, i) => <MessageBox msg={ msg } activeTab={ activeTab } activeMsg={ activeMsg } onClick={ this.handleActiveMessage } handleSubmit={ this.handleSubmit } key={i} />) : "No messages yet"
                 }
                 </div>
 			</div>	

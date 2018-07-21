@@ -1,7 +1,6 @@
 const Message = require('../models/message');
 
 exports.getInbox = (req, res, next) => {
-    // res.json({ success: "Inbox" });
 
     Message.find({ "recipient.id": res.locals.id }, (err, msgs) => {
       // error handling
@@ -11,7 +10,6 @@ exports.getInbox = (req, res, next) => {
 }
 
 exports.getOutbox = (req, res, next) => {
-    // res.json({ success: "Outbox" });
 
     Message.find({ "author.id": res.locals.id }, { new: 0 }, (err, msgs) => {
       // error handling
