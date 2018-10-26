@@ -1,8 +1,9 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../_constants/auth.constants';
- 
-let token = JSON.parse(localStorage.getItem('accessToken'));
-const initialState = token ? { loggedIn: true, user: token.user.username } 
-                           : { loggedIn: false, user: null };
+import { getToken } from '../helpers/token';
+
+const tokens = getToken();
+const initialState = tokens.user ? 
+    { loggedIn: true, user: tokens.user.username } : { loggedIn: false, user: null };
  
 export function auth(state = initialState, action) {
     switch (action.type) {

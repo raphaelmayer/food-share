@@ -1,23 +1,34 @@
 'use strict';
 
+const REFRESH_TOKEN = "refreshToken";
+const ACCESS_TOKEN = "accessToken";
+
 const jwt = require('jsonwebtoken'),
       User = require('../models/user'),
       config = require('../config/main');
 
-const generateToken = (user) => {
-  return jwt.sign(user, config.secret, {
-    expiresIn: 10080 //seconds
-  });
+const generateToken = (user, type) => {
+  if (type === REFRESH_TOKEN) {
+    return jwt.sign({ _id: user._id }, config.secret, {
+      expiresIn: 2592000 //seconds
+    });
+  }
+  if (type === ACCESS_TOKEN) {
+    return jwt.sign(user, config.secret, {
+      expiresIn: 10080 //seconds
+    });
+  }
+  return { };
 };
 
 const setUserInfo = (req) => {
   return {
     _id: req._id,
-    //firstName: req.profile.firstName,
-    //lastName: req.profile.lastName,
+    // firstName: req.profile.firstName,
+    // lastName: req.profile.lastName,
     username: req.username,
     email: req.email,
-    role: req.role,
+    // role: req.role,
   };
 };
 
@@ -27,7 +38,8 @@ console.log("asd");
     let userInfo = setUserInfo(req.user);
 
     res.status(200).json({
-      token: 'JWT ' + generateToken(userInfo),
+      accessToken: 'JWT ' + generateToken(userInfo, ACCESS_TOKEN),
+      refreshToken: generateToken(userInfo, REFRESH_TOKEN),
       user: userInfo
     });
 };
@@ -77,7 +89,8 @@ exports.register = function(req, res, next) {
           let userInfo = setUserInfo(user);
 
           res.status(201).json({
-              token: 'JWT ' + generateToken(userInfo),
+              accessToken: 'JWT ' + generateToken(userInfo, ACCESS_TOKEN),
+              refreshToken: generateToken(userInfo, REFRESH_TOKEN),
               user: userInfo
           });
         });
@@ -86,6 +99,7 @@ exports.register = function(req, res, next) {
 
 // middleware to check if the user is the owner of the requested items.
 exports.requireOwnership = (req, res, next) => {
+  
   jwt.verify(req.headers.authorization.split(" ")[1], config.secret, (err, decoded) => {
 
     if (err) {

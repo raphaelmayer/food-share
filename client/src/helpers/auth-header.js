@@ -1,8 +1,11 @@
+import { getToken } from './token';
+
 function authHeader() {
-	const token = JSON.parse(localStorage.getItem('accessToken'));
-	
-	if (token && token.token) {
-		return { 'Authorization': token.token,
+	const token = getToken();
+	console.log(token)
+	if (token && token.accessToken && token.refreshToken) {
+		return { 'Authorization': token.accessToken,
+				 'refreshtoken': token.refreshToken,
 				 'Content-Type': 'application/json' };
 	} else return {};
 }

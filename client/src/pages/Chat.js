@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 // import '../services/chat.service';
 import './css/Chat.css';
 
-import { getToken } from '../services/auth.service';
+import { getToken } from '../helpers/token';
 
 class Chat extends Component {
   constructor(props) {

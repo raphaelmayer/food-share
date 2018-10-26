@@ -8,21 +8,22 @@ import { alertActions } from './_actions/alert.actions';
 import PrivateRoute from './components/PrivateRoute';
 import { store } from './helpers/store';
 
-import Chat from './containers/Chat';
+// import Chat from './pages/Chat';
 
-import { Nav } from './containers/nav';
-import GetStarted from './components/GetStarted';
-import Messages from './containers/Messages';
-import Profile from './containers/profile';
-import ProfileEdit from './containers/ProfileEdit';
-import GigEdit from './containers/GigEdit';
-import { Find } from './containers/find';
-import { Login } from './containers/login';
-import { Register } from './containers/register';
+import { Nav } from './containers/Nav';
 import Footer from './components/footer';
-import New from './containers/new';
-import { Gig } from './containers/gig';
-import Settings from './containers/settings';
+
+import GetStarted from './pages/GetStarted';
+import Messages from './pages/Messages';
+import Profile from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
+import GigEdit from './pages/GigEdit';
+import { Find } from './pages/Find';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import New from './pages/GigNew';
+import { Gig } from './pages/Gig';
+import Settings from './pages/Settings';
 
 class App extends Component {
   constructor(props) {
@@ -59,7 +60,6 @@ class App extends Component {
               <PrivateRoute path="/messages" component={ Messages } />
               
               <PrivateRoute exact path="/editprofile" component={ ProfileEdit } />
-              <Route exact path="/chat" component={ Chat } />
               <PrivateRoute path="/editgig/:username/:gigTitle" component={ GigEdit } />
     
               <Route path="/:username/:gigTitle" component={ Gig } />

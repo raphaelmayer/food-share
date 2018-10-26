@@ -30,8 +30,7 @@ const jwtOptions = {
 const jwtLogin = new JwtStrategy(jwtOptions, (request, payload, done) => {
 	const author = { id: payload._id, username: payload.username }
 	// console.log("payload: ", payload)
-	console.log("request.body.author:(in config/passport.js) ", request.body.author )
-
+	console.log("request.body.author:(in config/passport.js) ", request.body.author );
 	// author no longer from token.user but this solution is not optimal
 	request.body.author = author;	
 	//if (request.body.author) {

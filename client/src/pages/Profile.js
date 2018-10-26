@@ -5,7 +5,7 @@ import './css/profile.css';
 import GigCard from '../components/GigCard';
 import ProfileHead from '../components/ProfileHead';
 import EditButton from '../components/EditButton';
-import Reviews from '../components/Reviews';
+import Reviews from '../containers/Reviews';
 
 import { updateGigStatus } from '../services/gig.service';
 

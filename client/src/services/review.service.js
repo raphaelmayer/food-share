@@ -1,6 +1,6 @@
 import post from '../helpers/post';
 import history from '../helpers/history';
-import { getToken } from '../services/auth.service';
+import { getToken } from '../helpers/token';
 
 export function createReview(formdata, subject) {
 	const token = getToken();

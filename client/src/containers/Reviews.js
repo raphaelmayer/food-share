@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './css/Reviews.css';
 
 import { createReview, updateReview, deleteReview } from '../services/review.service';
-import { getToken } from '../services/auth.service';
-import ReviewBox from './ReviewBox';
+import { getToken } from '../helpers/token';
+import ReviewBox from '../components/ReviewBox';
 
 class Reviews extends Component {
 	constructor() {

@@ -1,5 +1,6 @@
-export default function userIsOwner(owner) {
-	const token = JSON.parse(localStorage.getItem('accessToken'));
+export default function userIsOwner(owner) {	// should be moved to take redux state
+	const token = JSON.parse(localStorage.getItem('accessToken'));	
+	const user = JSON.parse(localStorage.getItem('user'));
 
-	return (token && token.user.username === owner) ? true : false; 
+	return (token && user && user.username === owner) ? true : false; 
 }

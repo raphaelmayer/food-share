@@ -1,13 +1,4 @@
-export function getToken() {
-	const token = JSON.parse(localStorage.getItem('accessToken'));
-	
-	if (token && token.token) return token; 
-	else return {};
-}
-
-export function setToken(token) {
-	localStorage.setItem('accessToken', JSON.stringify(token));
-}
+import { getToken, setToken } from "../helpers/token";
 
 export function login(email, password) {
 	const reqOptions = {
@@ -24,12 +15,13 @@ export function login(email, password) {
 			}
 			return res.json()
 		})
-		.then(token => {
-			if(token && token.token) {
-				setToken(token);
+		.then(tokens => {
+			console.log(tokens);
+			if(tokens && tokens.accessToken && tokens.refreshToken) {
+				setToken(tokens);
 			}
 
-			return token;
+			return tokens;
 		});
 }
 
@@ -49,16 +41,18 @@ export function register(username, email, password) {
 			}
 			return res.json();
 		})
-		.then(token => {
-			if(token && token.token) {
-				setToken(token);
+		.then(tokens => {
+			if(tokens && tokens.accessToken && tokens.refreshToken) {
+				setToken(tokens);
 			}
 
-			return token;
+			return tokens;
 		});
 }
 
 export function logout() {
 		localStorage.removeItem('accessToken');
+		localStorage.removeItem('refreshToken');
+		localStorage.removeItem('user');
 		//this.props.history.push('/');
 }

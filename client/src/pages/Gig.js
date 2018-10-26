@@ -6,7 +6,7 @@ import './css/gig.css';
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
 import { sendMessage } from '../services/message.service';
 
-import Reviews from '../components/Reviews';
+import Reviews from '../containers/Reviews';
 import ProfileHead from '../components/ProfileHead';
 import EditButton from '../components/EditButton';
 
