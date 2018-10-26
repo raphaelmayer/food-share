@@ -1,4 +1,5 @@
 import post from '../helpers/post';
+import history from '../helpers/history';
 import authHeader from '../helpers/auth-header';
 
 
@@ -36,7 +37,10 @@ export function sendMessage(formdata, recipient) {
   post('/message/post', msg)
     .catch(err => console.error(err))
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+      history.go(history.location.pathname);
+    })
 }
 
 export const updateReadStatus = (msg) => {

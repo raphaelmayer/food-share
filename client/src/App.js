@@ -11,7 +11,7 @@ import { store } from './helpers/store';
 // import Chat from './pages/Chat';
 
 import { Nav } from './containers/Nav';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 
 import GetStarted from './pages/GetStarted';
 import Messages from './pages/Messages';

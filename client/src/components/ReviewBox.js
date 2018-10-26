@@ -18,7 +18,8 @@ const ReviewBox = (props) => {
 	        	</div>
 				<div>{ props.text }</div>
 				<small>(Last edit at { props.updatedAt.split("").splice(0, 10) })</small>
-{ props.user && props.user.id === props.author.id ? <EditIcons toggleEdit={ props.toggleEdit } reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
+{ props.user && props.user.id === props.author.id ? 
+	<EditIcons toggleEdit={ props.toggleEdit } reviewId={ props._id } update={ props.update } delete={ props.delete } /> : null }
 
 			</div>
 		);

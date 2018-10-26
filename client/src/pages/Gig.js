@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './css/gig.css';
+import './css/Gig.css';
 
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
 import { sendMessage } from '../services/message.service';

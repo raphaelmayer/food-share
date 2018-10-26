@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/new.css';
+import './css/GigNew.css';
 import filterOptions from '../helpers/filterOptions';
 
 import { createGig } from '../services/gig.service';

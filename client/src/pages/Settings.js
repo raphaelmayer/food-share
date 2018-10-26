@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/settings.css';
+import './css/Settings.css';
 import history from '../helpers/history';
 
 class Settings extends Component {

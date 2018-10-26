@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './css/profile.css';
+import './css/Profile.css';
 
 import GigCard from '../components/GigCard';
 import ProfileHead from '../components/ProfileHead';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './css/nav.css';
+import './css/Nav.css';
 
 import { logout } from '../_actions/auth.actions';
 

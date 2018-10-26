@@ -5,7 +5,7 @@ import filterOptions from '../helpers/filterOptions';
 
 import GigCard from '../components/GigCard';
 import { searchGigs } from '../services/client.service';
-import './css/find.css';
+import './css/Find.css';
 
 class Find extends Component {
 	constructor(props) {
