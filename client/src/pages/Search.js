@@ -5,9 +5,9 @@ import filterOptions from '../helpers/filterOptions';
 
 import GigCard from '../components/GigCard';
 import { searchGigs } from '../services/client.service';
-import './css/Find.css';
+import './css/Search.css';
 
-class Find extends Component {
+class Search extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { gigs: undefined, filterMenu: false, tags: [] };	
@@ -129,5 +129,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedFindPage = connect(mapStateToProps)(Find);
-export { connectedFindPage as Find }; 
+const connectedSearchPage = connect(mapStateToProps)(Search);
+export { connectedSearchPage as Search }; 

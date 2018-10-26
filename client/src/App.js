@@ -18,7 +18,7 @@ import Messages from './pages/Messages';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import GigEdit from './pages/GigEdit';
-import { Find } from './pages/Find';
+import { Search } from './pages/Search';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import New from './pages/GigNew';
@@ -63,7 +63,7 @@ class App extends Component {
               <PrivateRoute path="/editgig/:username/:gigTitle" component={ GigEdit } />
     
               <Route path="/:username/:gigTitle" component={ Gig } />
-              <Route exact path="/" component={ Find } />
+              <Route exact path="/" component={ Search } />
               <PrivateRoute path="/new" component={ New } />
               <Route exact path="/:username" component={ Profile } />
             </Switch> 
