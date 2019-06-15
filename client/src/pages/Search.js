@@ -85,7 +85,8 @@ class Search extends Component {
 					<div className="filter-menu">
 						<small className="big-search-more" onClick={ props.toggleFilterMenu }>more . . .</small>
 					</div>
-				);}
+				);
+			}
 		}
 
 		if(this.props.client.isLoading) {

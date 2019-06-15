@@ -1,12 +1,12 @@
 const AuthController = require('./controllers/authentication'),
-  reviewController = require('./controllers/review'),
-  gigController = require('./controllers/gig'),
-  userController = require('./controllers/user'),
-  messageController = require('./controllers/message'),
-	express = require('express'),
-	passportService = require('./config/passport'),
-	passport = require('passport'),
-  helpers = require('./helpers');
+  	  reviewController = require('./controllers/review'),
+  	  gigController = require('./controllers/gig'),
+  	  userController = require('./controllers/user'),
+  	  messageController = require('./controllers/message'),
+	  express = require('express'),
+	  passportService = require('./config/passport'),
+	  passport = require('passport'),
+  	  helpers = require('./helpers');
 
 const Gig = require('./models/gig');  //für test
 
@@ -15,11 +15,11 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
 const requireOwner = AuthController.requireOwnership;
 
-//role types
+//role types - not implemented
 const REQUIRE_OWNER = "Owner",
-	    REQUIRE_ADMIN = "Admin",
-	    REQUIRE_SELLER = "Seller",
-	    REQUIRE_BUYER = "Buyer";
+	  REQUIRE_ADMIN = "Admin",
+	  REQUIRE_SELLER = "Seller",
+	  REQUIRE_BUYER = "Buyer";
 
 module.exports = (app) => {
 	const apiRoutes = express.Router(),

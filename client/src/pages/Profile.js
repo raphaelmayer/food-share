@@ -16,14 +16,14 @@ class Profile extends Component {
 			user: null,
 			edit: false
 		};
-		this.handleTest = this.handleTest.bind(this)
+		this.handleTest = this.handleTest.bind(this);
 	}
 
 	componentDidMount() {
 		let username = window.location.pathname; //.split("").slice(1).join("");
 		fetch('http://localhost:3001/api/user/getall' + username)
 			.then(res => res.json())
-			.then(user => {console.log(user);this.setState({user: user})})
+			.then(user => {console.log(user);this.setState({ user: user })})
     }
 
     handleTest(e) {
@@ -57,7 +57,7 @@ class Profile extends Component {
 
 						<div className="profile-description">
 							<h4>profile-description</h4>
-							<p>{user.description}</p>
+							<p>{ user.description }</p>
 						</div> 
 	
 						<div className="profile-reviews">
@@ -70,7 +70,7 @@ class Profile extends Component {
 			)
 		} else {
 			return(
-				<div>Could not find a user named <q>{ window.location.pathname.slice(1) }</q>.<button type="button" onClick={this.handleTest}></button></div>
+				<div>Could not find a user named <q>{ window.location.pathname.slice(1) }</q>.<button type="button" onClick={ this.handleTest }></button></div>
 			);
 		}
 	};

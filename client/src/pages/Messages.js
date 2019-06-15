@@ -72,7 +72,7 @@ class Message extends Component {
                 </div>    
                 <div className="messages-container">
                 {
-                    messages !== null ? messages.map((msg, i) => <MessageBox msg={ msg } activeTab={ activeTab } activeMsg={ activeMsg } onClick={ this.handleActiveMessage } handleSubmit={ this.handleSubmit } key={i} />) : "No messages yet"
+                    Array.isArray(messages) ? messages.map((msg, i) => <MessageBox msg={ msg } activeTab={ activeTab } activeMsg={ activeMsg } onClick={ this.handleActiveMessage } handleSubmit={ this.handleSubmit } key={i} />) : "No messages yet"
                 }
                 </div>
 			</div>	
