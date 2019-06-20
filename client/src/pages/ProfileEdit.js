@@ -19,7 +19,7 @@ class ProfileEdit extends Component {
 		console.log(userId)
 
 		getUser(userId)
-		.then(user => {this.setState({ user: user });console.log(user)})
+		.then(user => this.setState({ user: user }))
     }
 
     handleChange(e) {

@@ -1,19 +1,17 @@
-const express = require('express'),
-				app = express(),
-				bodyParser = require('body-parser'),
-				logger = require('morgan'),
-				mongoose = require('mongoose'),
-				config = require('./config/main'),
-				router = require('./router/index'),
-				socketIO = require('./socketIO');
-
+const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./config/main');
+const router = require('./router/index');
+const socketIO = require('./socketIO');
 
 mongoose.connect(config.database);
 
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(logger('dev'));
 
 app.use((req, res, next) => {
@@ -24,15 +22,10 @@ app.use((req, res, next) => {
   	next();
 });
 
-app.get('/', (req, res) => {
-	res.end('Access via ./api/:route')
-})
-
+router(app);
 
 const server = app.listen(config.port);
 console.log('Your server is running on port ' + config.port + '.');
 
-socketIO(server);
-
-router(app);
-
+// playing around with sockets
+// socketIO(server);

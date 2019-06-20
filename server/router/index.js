@@ -11,7 +11,6 @@ const Gig = require('../models/gig');  // für test
 
 module.exports = (app) => {
 	const apiRouter = express.Router();
-	
 	app.use("/api", apiRouter);
 
 	apiRouter.use("/auth", authRouter);
@@ -39,7 +38,6 @@ module.exports = (app) => {
 	      	if (err) console.error(err);
 	      	res.json(items);
 	    })
-	    //res.json({ "req.params": req.params, "req.query": req.query });
   	})  
 
 	// create fake gigs (not usable / clickable)

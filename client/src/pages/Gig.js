@@ -25,12 +25,12 @@ class Gig extends Component {
     const [ url, user, id ] = window.location.pathname.split('/');
     
     dispatch(getRequest());
-      getCompleteUser(user, id)
-      .then(user => {
-        this.setState({ user: user });
-        dispatch(getSuccess());
-      })
-      .catch(err => dispatch(getFailure(err)))
+    getCompleteUser(user, id)
+    .then(user => {
+      this.setState({ user: user });
+      dispatch(getSuccess());
+    })
+    .catch(err => dispatch(getFailure(err)))
   }
 
   handleClick(e) {

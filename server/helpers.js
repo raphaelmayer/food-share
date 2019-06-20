@@ -33,7 +33,7 @@ exports.getCompleteUser = async function(res, username, id) {
   const gigs = await Gig.find({ "author.username": username });
   const reviews = await Review.find({ 'subject.username': username });
   const stats = statsTotal(reviews);
-// console.log(user);
+  
   return { 
     username: user.username, 
     _id: user._id,
