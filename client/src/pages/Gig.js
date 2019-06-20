@@ -5,6 +5,7 @@ import './css/Gig.css';
 
 import { getRequest, getSuccess, getFailure } from '../_actions/client.actions';
 import { sendMessage } from '../services/message.service';
+import { getCompleteUser } from '../services/user.service';
 
 import Reviews from '../containers/Reviews';
 import ProfileHead from '../components/ProfileHead';
@@ -21,14 +22,15 @@ class Gig extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    const url = window.location.pathname.split('/');
+    const [ url, user, id ] = window.location.pathname.split('/');
     
     dispatch(getRequest());
-    fetch('http://localhost:3001/api/user/getall/' + url[1] + '/' + url[2])
-      .then(res => res.json())
-      .then(user => this.setState({ user: user }))
+      getCompleteUser(user, id)
+      .then(user => {
+        this.setState({ user: user });
+        dispatch(getSuccess());
+      })
       .catch(err => dispatch(getFailure(err)))
-      .then(dispatch(getSuccess()))
   }
 
   handleClick(e) {

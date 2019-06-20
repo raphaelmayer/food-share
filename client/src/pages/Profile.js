@@ -8,6 +8,7 @@ import EditButton from '../components/EditButton';
 import Reviews from '../containers/Reviews';
 
 import { updateGigStatus } from '../services/gig.service';
+import { getCompleteUser } from '../services/user.service';
 
 class Profile extends Component {
 	constructor(props) {
@@ -20,10 +21,9 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
-		let username = window.location.pathname; //.split("").slice(1).join("");
-		fetch('http://localhost:3001/api/user/getall' + username)
-			.then(res => res.json())
-			.then(user => {console.log(user);this.setState({ user: user })})
+		let username = window.location.pathname.split("/").slice(1).join("");
+		getCompleteUser(username)
+		.then(user => this.setState({ user: user }))
     }
 
     handleTest(e) {

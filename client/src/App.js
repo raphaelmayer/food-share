@@ -25,6 +25,7 @@ import New from './pages/GigNew';
 import { Gig } from './pages/Gig';
 import Settings from './pages/Settings';
 
+console.log(process.env)
 class App extends Component {
   constructor(props) {
     super(props);

@@ -8,5 +8,7 @@ export function searchGigs(fd, tags) { // fd = formdata
 	const query = input + "?" + category + joinedTags;
 	console.log(query);
 
-	return fetch('http://localhost:3001/api/search/' + encodeURI(query))
+	return fetch(process.env.REACT_APP_API_URL + '/search/' + encodeURI(query))
+		.then(res => res.json())
+		.catch(console.error)
 }

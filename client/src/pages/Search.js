@@ -5,6 +5,7 @@ import filterOptions from '../helpers/filterOptions';
 
 import GigCard from '../components/GigCard';
 import { searchGigs } from '../services/client.service';
+import { getGigs } from '../services/gig.service';
 import './css/Search.css';
 
 class Search extends Component {
@@ -20,18 +21,17 @@ class Search extends Component {
 	componentDidMount() {
 		const { dispatch } = this.props;
 		dispatch(getRequest());
-      	fetch('http://localhost:3001/api/getgigs') //
-      		.then(res => res.json())
-      		.then(gigs => this.setState({ gigs: gigs }))
-      		.catch(err => dispatch(getFailure(err)))
-      		.then(dispatch(getSuccess()))
+      	getGigs() //
+      	.then(gigs => {
+      		this.setState({ gigs: gigs });
+      		dispatch(getSuccess());
+      	})
+      	.catch(err => dispatch(getFailure(err)))
 	}
 
 	handleSearch(e) {
 		e.preventDefault();
 		searchGigs(e.target, this.state.tags)
-		.catch(err => console.error(err))
-		.then(res => res.json())
 		.then(d => this.setState({ gigs: d }))
 	}
 	toggleFilterMenu(e) {

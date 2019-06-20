@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/ProfileEdit.css';
 
 import { getToken } from '../helpers/token';
-import { updateUser } from '../services/user.service';
+import { getUser, updateUser } from '../services/user.service';
 
 class ProfileEdit extends Component {
 	constructor(props) {
@@ -17,9 +17,9 @@ class ProfileEdit extends Component {
 	componentDidMount() {
 		const userId = getToken().user._id; 
 		console.log(userId)
-		fetch('http://localhost:3001/api/user/get/' + userId)
-			.then(res => res.json())
-			.then(user => this.setState({ user: user }))
+
+		getUser(userId)
+		.then(user => {this.setState({ user: user });console.log(user)})
     }
 
     handleChange(e) {

@@ -1,6 +1,18 @@
-import post from '../helpers/post';
-import history from '../helpers/history';
-import { getToken } from '../helpers/token';
+import request from "../helpers/request";
+import history from "../helpers/history";
+import { getToken } from "../helpers/token";
+
+export function getGigs(id) {
+	return fetch(process.env.REACT_APP_API_URL + '/gig')
+		.then(res => res.json())
+		.catch(console.error)
+}
+
+export function getGig(id) {
+	return fetch(process.env.REACT_APP_API_URL + '/gig/' + id)
+		.then(res => res.json())
+		.catch(console.error)
+}
 
 export function createGig(formdata) {
 	const token = getToken();
@@ -13,12 +25,12 @@ export function createGig(formdata) {
 		tags: formdata[5].value,
 		//author: { id: token.user._id, username: token.user.username },
 	}
-	post('/gig/post', gig)
+	request("POST", "/gig/", gig)
       	.catch(err => console.error(err))
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.author.username + '/' + data.gig._id);
+      		history.push("/" + data.gig.author.username + "/" + data.gig._id);
 		})
 }
 
@@ -35,27 +47,27 @@ export function updateGig(formdata, id) {
 		//	.author nied unbedingt gut
 		//author: { id: token.user._id, username: token.user.username },
 	}
-	post('/gig/update/' + id, gig)
+	request("PUT", "/gig/" + id, gig)
       	.catch(err => console.error(err))
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.author.username + '/' + data.gig._id);
+      		history.push("/" + data.gig.author.username + "/" + data.gig._id);
 		})
 }
 
 export function deleteGig(id) {
-	post('/gig/delete/' + id)
+	request("DELETE", "/gig/" + id)
       	.catch(err => console.error(err))
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-      		history.push('/' + data.gig.author.username);
+      		history.push("/" + data.gig.author.username);
 		})
 }
 
 export function updateGigStatus(newStatus, id) {
-	post('/gig/status/' + id, newStatus)
+	request("POST", "/gig/status/" + id, newStatus)
 		.catch(err => console.error(err))
 		.then(res => res.json())
 		.then(data => console.log(data));

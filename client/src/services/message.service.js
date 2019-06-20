@@ -1,11 +1,11 @@
-import post from '../helpers/post';
-import history from '../helpers/history';
-import authHeader from '../helpers/auth-header';
+import request from "../helpers/request";
+import history from "../helpers/history";
+import authHeader from "../helpers/auth-header";
 
 
 export function getInbox() {
   return new Promise((resolve, reject) => {
-    fetch('/api/message/getInbox', { headers: authHeader() })
+    fetch("/api/message/inbox", { headers: authHeader() })
       .catch(err => {
         console.error(err);
         reject(err);
@@ -17,7 +17,7 @@ export function getInbox() {
 
 export function getOutbox() {
   return new Promise((resolve, reject) => {
-    fetch('/api/message/getOutbox', { headers: authHeader() })
+    fetch("/api/message/outbox", { headers: authHeader() })
       .catch(err => {
         console.error(err);
         reject(err);
@@ -34,7 +34,7 @@ export function sendMessage(formdata, recipient) {
     text: formdata[0].value,
   }
 
-  post('/message/post', msg)
+  request("POST", "/message/", msg)
     .catch(err => console.error(err))
     .then(res => res.json())
     .then(data => {

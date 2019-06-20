@@ -1,8 +1,8 @@
 import authHeader from '../helpers/auth-header';
 
-function post(path, payload) {
+function request(verb, path, payload) {
 	const options = {
-		method: 'POST',
+		method: verb,
 	    mode: 'cors',
 	    headers: authHeader(),
 	    body: JSON.stringify(payload), 
@@ -11,4 +11,4 @@ function post(path, payload) {
 	return fetch('http://localhost:3001/api' + path, options)
 }
 
-export default post;
+export default request;

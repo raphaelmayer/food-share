@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/GigEdit.css';
 import filterOptions from '../helpers/filterOptions';
 
-import { updateGig, deleteGig } from '../services/gig.service';
+import { getGig, updateGig, deleteGig } from '../services/gig.service';
 
 class GigEdit extends Component {
 	constructor(props) {
@@ -17,9 +17,9 @@ class GigEdit extends Component {
 		const id = window.location.pathname.split('/')[3];
 		console.log('gigId:', decodeURI(id))
 		
-		fetch('http://localhost:3001/api/gig/get/' + id) 
-			.then(res => res.json())
-			.then(gig => this.setState({ gig }))
+		getGig(id)
+		.then(gig => this.setState({ gig }))
+
     }
 
     handleChange(e) {

@@ -4,7 +4,7 @@ const authMiddleware = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get('/getgigs', controller.getGigs);
+router.get('/', controller.getGigs);
 router.get('/:id', controller.getGig);
 router.post('/', authMiddleware.requireAuth, controller.createGig);
 router.put('/:id', authMiddleware.requireOwnership, controller.updateGig);

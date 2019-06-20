@@ -1,4 +1,4 @@
-import post from '../helpers/post';
+import request from '../helpers/request';
 import history from '../helpers/history';
 import { getToken } from '../helpers/token';
 
@@ -10,7 +10,7 @@ export function createReview(formdata, subject) {
 		//author: { id: token.user._id, username: token.user.username },
 		subject: { id: subject.id, username: subject.username },
 	}
-	post('/review/post', review)
+	request('POST', '/review/', review)
 	.catch(err => console.error(err))
 	.then(res => res.json())
 	.then(data => {
@@ -28,7 +28,7 @@ export function updateReview(formdata, id) {	// review id to find doc in db
 		//author: { id: token.user._id, username: token.user.username },
 		//subject: { id: token.user._id, username: token.user.username },
 	}
-	post('/review/update/' + id, review)
+	request('PUT', '/review/' + id, review)
 	.catch(err => console.error(err))
 	.then(res => res.json())
 	.then(data => {
@@ -39,7 +39,7 @@ export function updateReview(formdata, id) {	// review id to find doc in db
 }
 
 export function deleteReview(id) {	// review id to find doc in db
-	post('/review/delete/' + id)
+	request('DELETE', '/review/' + id)
 	.catch(err => console.error(err))
 	.then(res => res.json())
 	.then(data => {
