@@ -4,7 +4,7 @@ const express = require('express'),
 				logger = require('morgan'),
 				mongoose = require('mongoose'),
 				config = require('./config/main'),
-				router = require('./router'),
+				router = require('./router/index'),
 				socketIO = require('./socketIO');
 
 

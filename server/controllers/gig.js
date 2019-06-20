@@ -1,6 +1,15 @@
 const Gig = require('../models/gig');
 
-exports.getGigs = (req, res, next) => {
+module.exports = {
+  getGigs,
+  getGig,
+  createGig,
+  updateGig,
+  deleteGig,
+  updateGigStatus
+}
+
+function getGigs(req, res, next) {
   Gig.find({}, (err, gig) => {
     if (err) console.error(err);
     if (gig) res.json(gig); 
@@ -8,14 +17,14 @@ exports.getGigs = (req, res, next) => {
   });
 }
 
-exports.getGig = (req, res, next) => {
+function getGig(req, res, next) {
   Gig.findById(req.params.id, (err, gig) => {
     if (err) console.error(err);
     res.json(gig);
   });
 }
 
-exports.createGig = (req, res, next) => {
+function createGig(req, res, next) {
   console.log(req.headers)
   let gig = new Gig(req.body);
 
@@ -25,7 +34,7 @@ exports.createGig = (req, res, next) => {
   });
 }
 
-exports.updateGig = (req, res, next) => {
+function updateGig(req, res, next) {
   const query = { _id: req.params.id, "author.id": res.locals.id };
   Gig.findOneAndUpdate(query, { $set: req.body }, (err, gig) => {
     if (err) console.error(err);
@@ -35,7 +44,7 @@ exports.updateGig = (req, res, next) => {
   });
 }
 
-exports.deleteGig = (req, res, next) => {
+function deleteGig(req, res, next) {
   const query = { _id: req.params.id, "author.id": res.locals.id };
   Gig.findOneAndRemove(query, (err, gig) => {
     if (err) console.error(err);
@@ -44,7 +53,7 @@ exports.deleteGig = (req, res, next) => {
   });
 }
 
-exports.updateGigStatus = (req, res, next) => {
+function updateGigStatus(req, res, next) {
   console.log(req.body.status);
   const query = { _id: req.params.id, "author.id": res.locals.id };
   Gig.findOneAndUpdate(query, { status: req.body.status }, (err, gig) => {

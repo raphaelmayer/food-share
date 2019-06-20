@@ -1,11 +1,16 @@
 'use strict';
 
-const REFRESH_TOKEN = "refreshToken";
-const ACCESS_TOKEN = "accessToken";
-
 const jwt = require('jsonwebtoken'),
       User = require('../models/user'),
       config = require('../config/main');
+
+const REFRESH_TOKEN = "refreshToken";
+const ACCESS_TOKEN = "accessToken";
+
+module.exports = {
+  login,
+  register,
+}
 
 const generateToken = (user, type) => {
   if (type === REFRESH_TOKEN) {
@@ -33,19 +38,19 @@ const setUserInfo = (req) => {
 };
 
 // Login Route
-exports.login = function(req, res, next) {
-console.log("asd");
-    let userInfo = setUserInfo(req.user);
+function login(req, res, next) {
+  console.log("asd");
+  let userInfo = setUserInfo(req.user);
 
-    res.status(200).json({
-      accessToken: 'JWT ' + generateToken(userInfo, ACCESS_TOKEN),
-      refreshToken: generateToken(userInfo, REFRESH_TOKEN),
-      user: userInfo
-    });
+  res.status(200).json({
+    accessToken: 'JWT ' + generateToken(userInfo, ACCESS_TOKEN),
+    refreshToken: generateToken(userInfo, REFRESH_TOKEN),
+    user: userInfo
+  });
 };
 
 // Registration Route
-exports.register = function(req, res, next) {
+function register(req, res, next) {
     // Check for registration errors
     const email = req.body.email;
     const username = req.body.username;
@@ -95,44 +100,4 @@ exports.register = function(req, res, next) {
           });
         });
     });
-};
-
-// middleware to check if the user is the owner of the requested items.
-exports.requireOwnership = (req, res, next) => {
-  
-  jwt.verify(req.headers.authorization.split(" ")[1], config.secret, (err, decoded) => {
-
-    if (err) {
-      res.status(422).json({ error: err });
-      return next(err);
-    }
-    if (decoded._id) {
-      res.locals.id = decoded._id;
-      return next();
-    }
-    res.status(401).json({ error: 'You are not authorized to view this content.(owner)' });
-    return next('Unauthorized');
-  })
-}
-
-// Role authorization check
-exports.roleAuthorization = function(role) {  
-    return function(req, res, next) {
-      const user = req.user;
-
-      User.findById(user._id, function(err, foundUser) {
-          if (err) {
-            res.status(422).json({ error: 'No user was found.' });
-            return next(err);
-          }
-
-          // If user is found, check role.
-          if (foundUser.role == role) {
-            return next();
-          }
-
-          res.status(401).json({ error: 'You are not authorized to view this content.(role)' });
-          return next('Unauthorized');
-      });
-    };
 };

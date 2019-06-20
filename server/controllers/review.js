@@ -1,13 +1,20 @@
 const Review = require('../models/review');
 
-exports.getReviews = (req, res) => {
+module.exports = {
+  getReviews,
+  // getReview,
+  createReview,
+  updateReview,
+  deleteReview
+}
+
+function getReviews(req, res) {
   Review.find({ gigId: req.params.gigId }, (err, reviews) => {
     res.json(reviews);
   })
 }
 
-
-exports.createReview = (req, res, next) => {
+function createReview(req, res, next) {
   let review = new Review(req.body);
   review.save((err, review) => {
   	if(err) { return next(err); }
@@ -15,8 +22,7 @@ exports.createReview = (req, res, next) => {
   });
 }
 
-
-exports.updateReview = (req, res, next) => {
+function updateReview(req, res, next) {
   const query = { _id: req.params.id, "author.id": res.locals.id };
   console.log("U query", query);
 
@@ -27,8 +33,7 @@ exports.updateReview = (req, res, next) => {
   });
 }
 
-
-exports.deleteReview = (req, res, next) => {
+function deleteReview(req, res, next) {
   const query = { _id: req.params.id, "author.id": res.locals.id };
   console.log("D query", query);
 
@@ -38,6 +43,7 @@ exports.deleteReview = (req, res, next) => {
     else { res.json({ success: 'DELETED ', _id: review._id, seller: review.seller }); }
   });
 }
+
 /*
 exports.updateReview = (req, res, next) => {
     Review.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, review) => {

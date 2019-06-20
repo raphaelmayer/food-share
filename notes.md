@@ -1,4 +1,8 @@
 ## Notes
+refactoring: 
+rewrite server controllers and export (like userCtrl)
+rewrite server router
+delete notes
 ----
 ### // Critical User Stories for MVP
 - implement **refreshToken** and functionality

@@ -1,6 +1,14 @@
 const Message = require('../models/message');
 
-exports.getInbox = (req, res, next) => {
+module.exports = {
+  getInbox,
+  getOutbox,
+  getMessages,
+  createMessage,
+  updateReadStatus
+}
+
+function getInbox(req, res, next) {
 
     Message.find({ "recipient.id": res.locals.id }, (err, msgs) => {
       // error handling
@@ -9,7 +17,7 @@ exports.getInbox = (req, res, next) => {
     })
 }
 
-exports.getOutbox = (req, res, next) => {
+function getOutbox(req, res, next) {
 
     Message.find({ "author.id": res.locals.id }, { new: 0 }, (err, msgs) => {
       // error handling
@@ -18,13 +26,13 @@ exports.getOutbox = (req, res, next) => {
     })
 }
 
-exports.getMessages = (req, res, next) => {
+function getMessages(req, res, next) {
     console.log("getMessages", "Yay, got through!");
     console.log("res.locals.id", res.locals.id);
     res.end();
 }
 
-exports.updateReadStatus = (req, res, next) => {
+function updateReadStatus(req, res, next) {
   Message.findByIdAndUpdate(req.params.id, { $set: { new: false } }, (err, msg) => {
     if (err) console.error(err);
     if (msg) res.json(msg); 
@@ -32,7 +40,7 @@ exports.updateReadStatus = (req, res, next) => {
   });
 }
 
-exports.createMessage = (req, res, next) => {
+function createMessage(req, res, next) {
 	console.log("req", req.body);
     let msg = new Message(req.body);
     console.log("msg", msg);

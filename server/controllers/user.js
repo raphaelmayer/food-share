@@ -1,7 +1,14 @@
 const User = require('../models/user');
 const helpers = require("../helpers");
 
-exports.getCompleteUser = (req, res) => {
+module.exports = {
+  getCompleteUser,
+  getUser,
+  updateUser,
+  deleteUser
+}
+
+function getCompleteUser(req, res) {
   const username = req.params.username;
   const gigId = req.params.gigId;
   
@@ -9,7 +16,7 @@ exports.getCompleteUser = (req, res) => {
   .then(data => res.json(data));
 }
 
-exports.getUser = (req, res) => {
+function getUser(req, res) {
   User.findById(req.params.id, (err, user) => {
     if (err) console.error(err);
     if (!user) res.json({ error: 'no such user' });
@@ -17,7 +24,7 @@ exports.getUser = (req, res) => {
   });
 }
 
-exports.updateUser = (req, res, next) => {
+function updateUser(req, res, next) {
   if (req.params.id === res.locals.id) {
     User.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, user) => {
       if (err) console.error(err);
@@ -29,7 +36,7 @@ exports.updateUser = (req, res, next) => {
   }
 }
 
-exports.deleteUser = (req, res) => {
+function deleteUser(req, res) {
   if (req.params.id === res.locals.id) {
     User.findByIdAndRemove(req.params.id, (err, user) => {
       if (err) console.error(err);
